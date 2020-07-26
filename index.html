@@ -4,6 +4,25 @@
      <script src="https://d3js.org/d3.v5.min.js"></script>
    </head>
    <body>
-     <p>DV-498 Narrative Visualization</p>
-   </body>
+    <p>DV-498 Narrative Visualization</p>
+    <svg width=100 height=350>
+    <circle fill='red'></circle>
+    <circle fill='orange'></circle>
+    <circle fill='yellow'></circle>
+    <circle fill='green'></circle>
+    <circle fill='blue'></circle>
+    <circle fill='purple'></circle>
+    </svg>
+    </body>
+    <script>
+    var data = [4,8,15,16,23,42];
+    
+    d3.selectAll("circle").attr("cx", "50");
+    var yd = [50,100,150,200,250,300];
+    d3.selectAll("circle").data(yd).attr("cy", function(y){return y});
+    d3.selectAll("circle").data(data).attr("r", function(rd){return rd});
+    
+    </script></html>
+    
+
  </html>
