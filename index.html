@@ -28,8 +28,8 @@
             var base= margin+height
 
             // Add Y axis
-            var y = d3.scaleLog()
-                .domain([10, 60])
+            var y = d3.scaleLinear()
+                .domain([0, 60])
                 .range([ height, 0]);
             var yAxis = d3.axisLeft(y)
                 .tickValues([10,20,30,40,50,60])
