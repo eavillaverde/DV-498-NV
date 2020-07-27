@@ -54,7 +54,6 @@
                 .call(xAxis);        
             
             var filteredDataYear = filterByYear(data, 1990);
-            console.log(filteredDataYear);
 
             // Add dots
             d3.select("svg").append('g')
@@ -70,11 +69,11 @@
 
         }
         
-        function filterByYear(data, year) {
-            return data.filter( d => {
-                return d.year == year;
-            });
-        }
+        function filterByYear(data, year){
+            return data.filter(function(d) {
+                return d.Year == year;
+            }) 
+         }
 
         var years = [1990, 1995, 2000, 2010, 2015];
 
