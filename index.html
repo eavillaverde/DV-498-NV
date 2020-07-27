@@ -13,9 +13,9 @@
 
         async function init() {
             //Read the data
-            const data1 = await d3.csv("data/obesity_dataset.csv");
+            const data = await d3.csv("data/obesity_dataset.csv");
 
-            data1.forEach(d=>{
+            data.forEach(d=>{
                 d.GDP=+d.GDP; 
                 d.Pct_Adults_Obese=+d.Pct_Adults_Obese; 
                 d.Pct_Adults_Overweight=+d.Pct_Adults_Overweight;
@@ -32,14 +32,14 @@
                 .domain([10, 60])
                 .range([ height, 0]);
             var yAxis = d3.axisLeft(y)
-                .tickValues([10,20,30,40,50])
+                .tickValues([10,20,30,40,50,60])
                 .tickFormat(d3.format("~s"));
             //Create x-axis
             var x = d3.scaleLog()
-                .domain([200, 50000])
+                .domain([200, 100000])
                 .range([ 0, width ]);
             var xAxis = d3.axisBottom(x)
-                .tickValues([1000,10000,20000,50000])
+                .tickValues([1000,10000,20000,50000,75000,100000])
                 .tickFormat(d3.format("~s"));
 
             d3.select("svg").append("g")
