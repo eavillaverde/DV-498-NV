@@ -1,4 +1,4 @@
-Entity,Code,Year,Share of adults who are obese (%),Share of adults that are overweight (%)
+Entity,Code,Year,Pct_Adults_Obese,Pct_Adults_Overweight
 Afghanistan,AFG,1975,0.5,5.3
 Afghanistan,AFG,1976,0.5,5.5
 Afghanistan,AFG,1977,0.6,5.7

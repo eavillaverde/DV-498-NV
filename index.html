@@ -6,33 +6,49 @@
      <script src="https://d3js.org/d3.v5.min.js"></script>
    </head>
    <body>
-        <svg id="viz" width=500 height=500>
+        <svg id="viz" width=600 height=600>
         </svg>
 
         <script>
 
         async function init() {
             //Read the data
-            const data= await d3.csv("data/obesity-vs-gdp.csv");
-            console.log(data);
+            const data1 = await d3.csv("data/obesity_dataset.csv");
+
+            data1.forEach(d=>{
+                d.GDP=+d.GDP; 
+                d.Pct_Adults_Obese=+d.Pct_Adults_Obese; 
+                d.Pct_Adults_Overweight=+d.Pct_Adults_Overweight;
+                d.Pct_Deaths_Obesity=+d.Pct_Deaths_Obesity;
+            });
+
             var margin=50;
-            var width=450;
-            var height=450;
+            var width=500;
+            var height=500;
             var base= margin+height
+
             // Add Y axis
             var y = d3.scaleLog()
-                .domain([10, 150])
+                .domain([10, 60])
                 .range([ height, 0]);
             var yAxis = d3.axisLeft(y)
-                .tickValues([10,20,50,100])
+                .tickValues([10,20,30,40,50])
                 .tickFormat(d3.format("~s"));
             //Create x-axis
             var x = d3.scaleLog()
-                .domain([10, 150])
+                .domain([200, 50000])
                 .range([ 0, width ]);
             var xAxis = d3.axisBottom(x)
-                .tickValues([10,20,50,100])
+                .tickValues([1000,10000,20000,50000])
                 .tickFormat(d3.format("~s"));
+
+            d3.select("svg").append("g")
+                .attr("transform", "translate(" + margin + "," + margin + ")")
+                .call(yAxis);
+            d3.select("svg").append("g")
+                .attr("transform", "translate(" + margin + "," + base + ")")
+                .call(xAxis);        
+
             // Add dots
             d3.select("svg").append('g')
                 .attr("transform", "translate(" + margin + "," + margin + ")")
@@ -41,14 +57,10 @@
                 .enter()
                 .append("circle")
                 .attr("cx", function (d) { return x(d.GDP);})
-                .attr("cy", function (d) { return y(d.Pct_Adults_Obesity);} )
-                .attr("r", function (d){ return +d.Pct_Adults_Obesity+2});
-            d3.select("svg").append("g")
-                .attr("transform", "translate(" + margin + "," + margin + ")")
-                .call(yAxis);
-            d3.select("svg").append("g")
-                .attr("transform", "translate(" + margin + "," + base + ")")
-                .call(xAxis);
+                .attr("cy", function (d) { return y(d.Pct_Adults_Obese);} )
+                .attr("r", function (d){ return 2});
+
+
         }
             
         </script>
