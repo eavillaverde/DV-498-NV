@@ -10,11 +10,8 @@
             <select class="box" id="selectYear" value=1990></select>
         </label>
 
-        <svg id="viz" width=600 height=600>
+        <svg id="viz" width=700 height=700>
         </svg>
-
-        <div id="legend" width=600 height=100>
-        </div>
 
         <script>
 
@@ -66,7 +63,8 @@
             console.log(filteredDataYear);
 
             // Add dots
-            d3.select("svg").append('g')
+            d3.select("svg")
+                .append('g')
                 .attr("transform", "translate(" + margin + "," + margin + ")")
                 .selectAll("dot")
                 .data(filteredDataYear) //data
@@ -84,11 +82,24 @@
             .data(continents)
             .enter()
             .append("circle")
-                .attr("cx", 700)
-                .attr("cy", function(d,i){ return 700 + i*25}) // 100 is where the first dot appears. 25 is the distance between dots
-                .attr("r", 7)
+                .attr("cx", margin)
+                .attr("cy", function(d,i){ return 600 + i*25}) // 100 is where the first dot appears. 25 is the distance between dots
+                .attr("r", 5)
                 .style("fill", function(d){ return color(d)});
             
+            // Add one dot in the legend for each name.
+            d3.select("svg")
+            .append('g')
+            .data(continents)
+            .enter()
+            .append("text")
+                .attr("x", margin + 10)
+                .attr("y", function(d,i){ return 600 + i*25}) // 100 is where the first dot appears. 25 is the distance between dots
+                .style("fill", function(d){ return color(d)})
+                .text(function(d){ return d})
+                .attr("text-anchor", "left")
+                .style("alignment-baseline", "middle")
+
 
         }
         
