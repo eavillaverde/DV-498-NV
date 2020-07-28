@@ -46,9 +46,10 @@
                 .tickValues([250,1000,10000,25000,50000,75000,100000])
                 .tickFormat(d3.format("~s"));
             
+            var continents = ["Africa", "Asia", "Europe", "North America", "South America" , "Oceania"];
             // Color scale: give me a specie name, I return a color
             var color = d3.scaleOrdinal()
-            .domain(["Africa", "Asia", "Europe", "North America", "South America" , "Oceania"])
+            .domain(continents)
             .range(["cyan", "green", "blue", "red", "light purple", "orange"])
 
             d3.select("svg").append("g")
@@ -73,6 +74,28 @@
                 .attr("r", function (d){ return 3})
                 .style("fill", function (d) { return color(d.Continent_Name); })
 
+
+            // Add one dot in the legend for each name.
+            d3.select("svg").append('g')
+            .data(continents)
+            .enter()
+            .append("circle")
+                .attr("cx", 100)
+                .attr("cy", function(d,i){ return 100 + i*25}) // 100 is where the first dot appears. 25 is the distance between dots
+                .attr("r", 7)
+                .style("fill", function(d){ return color(d)})
+
+            // Add one dot in the legend for each name.
+            Svg.selectAll("mylabels")
+            .data(continents)
+            .enter()
+            .append("text")
+                .attr("x", 120)
+                .attr("y", function(d,i){ return 100 + i*25}) // 100 is where the first dot appears. 25 is the distance between dots
+                .style("fill", function(d){ return color(d)})
+                .text(function(d){ return d})
+                .attr("text-anchor", "left")
+                .style("alignment-baseline", "middle")
         }
         
         function filterByYear(data, year){
