@@ -6,13 +6,21 @@
      <script src="https://d3js.org/d3.v5.min.js"></script>
    </head>
    <body onload='init()'>
-        <label style="float: left;font-size: smaller;" for="country">Choose a year:
-            <select class="box" id="selectYear" value=1990></select>
-        </label>
+        <div id="input">
+            <label style="float: left;font-size: smaller;" for="country">Choose a year:
+                <select class="box" id="selectYear" value=1990></select>
+            </label>
+        </div>
 
-        <svg id="viz" width=700 height=700>
-        </svg>
+        <div id="vizpanel">
+            <svg id="viz" width=600 height=600>
+            </svg>
+        </div>
 
+        <div id="legendpanel">
+            <svg id="legend" width=600 height=200>
+            </svg>     
+        </div>
         <script>
 
         async function init() {
@@ -50,12 +58,12 @@
             // Color scale: give me a specie name, I return a color
             var color = d3.scaleOrdinal()
             .domain(continents)
-            .range(["cyan", "green", "blue", "red", "magenta", "darkorange"])
+            .range(["green", "magenta", "blue", "red", "deepskyblue", "darkorange"])
 
-            d3.select("svg").append("g")
+            d3.select("#viz").append("g")
                 .attr("transform", "translate(" + margin + "," + margin + ")")
                 .call(yAxis);
-            d3.select("svg").append("g")
+            d3.select("#viz").append("g")
                 .attr("transform", "translate(" + margin + "," + base + ")")
                 .call(xAxis);        
             
@@ -63,7 +71,7 @@
             console.log(filteredDataYear);
 
             // Add dots
-            d3.select("svg")
+            d3.select("#viz")
                 .append('g')
                 .attr("transform", "translate(" + margin + "," + margin + ")")
                 .selectAll("dot")
@@ -77,7 +85,7 @@
 
 
             // Add one dot in the legend for each name.
-            d3.select("svg")
+            d3.select("#legend")
             .append('g')
             .attr("transform", "translate(" + margin + "," + margin + ")")
             .selectAll("leyend")
@@ -85,12 +93,12 @@
             .enter()
             .append("circle")
                 .attr("cx", margin)
-                .attr("cy", function(d,i){ return 600 + i*25}) // 100 is where the first dot appears. 25 is the distance between dots
+                .attr("cy", function(d,i){ return 50 + i*25}) // 100 is where the first dot appears. 25 is the distance between dots
                 .attr("r", 5)
                 .style("fill", function(d){ return color(d) });
             
             // Add one dot in the legend for each name.
-            d3.select("svg")
+            d3.select("#legend")
             .append('g')
             .attr("transform", "translate(" + margin + "," + margin + ")")
             .selectAll("leyendtext")
@@ -98,7 +106,7 @@
             .enter()
             .append("text")
                 .attr("x", margin + 10)
-                .attr("y", function(d,i){ return 600 + i*25}) // 100 is where the first dot appears. 25 is the distance between dots
+                .attr("y", function(d,i){ return 50 + i*25}) // 100 is where the first dot appears. 25 is the distance between dots
                 .style("fill", function(d){ return color(d)})
                 .text(function(d){ return d})
                 .attr("text-anchor", "left")
