@@ -87,7 +87,7 @@
             // Add one dot in the legend for each name.
             d3.select("#legend")
             .append('g')
-            .attr("transform", "translate(" + margin + "," + margin + ")")
+            .attr("transform", "translate(" + margin + ", 0)")
             .selectAll("leyend")
             .data(continents)
             .enter()
@@ -100,7 +100,7 @@
             // Add one dot in the legend for each name.
             d3.select("#legend")
             .append('g')
-            .attr("transform", "translate(" + margin + "," + margin + ")")
+            .attr("transform", "translate(" + margin + ", 0)")
             .selectAll("leyendtext")
             .data(continents)
             .enter()
