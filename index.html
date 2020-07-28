@@ -45,6 +45,11 @@
             var xAxis = d3.axisBottom(x)
                 .tickValues([1000,10000,25000,50000,75000,100000])
                 .tickFormat(d3.format("~s"));
+            
+            // Color scale: give me a specie name, I return a color
+            var color = d3.scaleOrdinal()
+            .domain(["Africa", "Asia", "Europe", "North America", "South America" , "Oceania"])
+            .range(["blue", "green", "yellow", "red", "pink", "orange"])
 
             d3.select("svg").append("g")
                 .attr("transform", "translate(" + margin + "," + margin + ")")
@@ -63,10 +68,10 @@
                 .data(filteredDataYear) //data
                 .enter()
                 .append("circle")
-                .attr("cx", function (d) { return x(d.GDP);})
-                .attr("cy", function (d) { return y(d.Pct_Adults_Obese);} )
+                .attr("cx", function (d) { return x(d.GDP); })
+                .attr("cy", function (d) { return y(d.Pct_Adults_Obese); })
                 .attr("r", function (d){ return 2})
-                .style("fill", "#69b3a2");
+                .style("fill", function (d) { return color(d.Continent_Name); })
 
         }
         
