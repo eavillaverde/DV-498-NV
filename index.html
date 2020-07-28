@@ -80,18 +80,20 @@
             d3.select("svg")
             .append('g')
             .attr("transform", "translate(" + margin + "," + margin + ")")
+            .selectAll("leyend")
             .data(continents)
             .enter()
             .append("circle")
                 .attr("cx", margin)
                 .attr("cy", function(d,i){ return 600 + i*25}) // 100 is where the first dot appears. 25 is the distance between dots
                 .attr("r", 5)
-                .style("fill", function(d){ return color(d)});
+                .style("fill", function(d){ return color(d) });
             
             // Add one dot in the legend for each name.
             d3.select("svg")
             .append('g')
             .attr("transform", "translate(" + margin + "," + margin + ")")
+            .selectAll("leyendtext")
             .data(continents)
             .enter()
             .append("text")
