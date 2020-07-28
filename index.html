@@ -50,7 +50,7 @@
             // Color scale: give me a specie name, I return a color
             var color = d3.scaleOrdinal()
             .domain(continents)
-            .range(["cyan", "green", "blue", "red", "light purple", "orange"])
+            .range(["cyan", "green", "blue", "red", "magenta", "darkorange"])
 
             d3.select("svg").append("g")
                 .attr("transform", "translate(" + margin + "," + margin + ")")
@@ -86,7 +86,7 @@
                 .style("fill", function(d){ return color(d)})
 
             // Add one dot in the legend for each name.
-            Svg.selectAll("mylabels")
+            d3.select("svg").append('g')
             .data(continents)
             .enter()
             .append("text")
