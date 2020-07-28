@@ -49,7 +49,7 @@
             // Color scale: give me a specie name, I return a color
             var color = d3.scaleOrdinal()
             .domain(["Africa", "Asia", "Europe", "North America", "South America" , "Oceania"])
-            .range(["blue", "green", "yellow", "red", "pink", "orange"])
+            .range(["cyan", "green", "blue", "red", "purple", "orange"])
 
             d3.select("svg").append("g")
                 .attr("transform", "translate(" + margin + "," + margin + ")")
@@ -70,7 +70,7 @@
                 .append("circle")
                 .attr("cx", function (d) { return x(d.GDP); })
                 .attr("cy", function (d) { return y(d.Pct_Adults_Obese); })
-                .attr("r", function (d){ return 2})
+                .attr("r", function (d){ return 3})
                 .style("fill", function (d) { return color(d.Continent_Name); })
 
         }
