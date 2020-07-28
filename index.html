@@ -40,16 +40,16 @@
                 .tickFormat(d3.format("~s"));
             //Create x-axis
             var x = d3.scaleLog()
-                .domain([200, 100000])
+                .domain([250, 100000])
                 .range([ 0, width ]);
             var xAxis = d3.axisBottom(x)
-                .tickValues([1000,10000,25000,50000,75000,100000])
+                .tickValues([250,1000,10000,25000,50000,75000,100000])
                 .tickFormat(d3.format("~s"));
             
             // Color scale: give me a specie name, I return a color
             var color = d3.scaleOrdinal()
             .domain(["Africa", "Asia", "Europe", "North America", "South America" , "Oceania"])
-            .range(["cyan", "green", "blue", "red", "purple", "orange"])
+            .range(["cyan", "green", "blue", "red", "light purple", "orange"])
 
             d3.select("svg").append("g")
                 .attr("transform", "translate(" + margin + "," + margin + ")")
@@ -77,7 +77,7 @@
         
         function filterByYear(data, year){
             return data.filter(function(d) {
-                return d.Year == year;
+                return d.Year == year && d.GDP > 0;
             }) 
          }
 
