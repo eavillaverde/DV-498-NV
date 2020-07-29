@@ -67,19 +67,23 @@
             .domain(continents)
             .range(["green", "magenta", "blue", "red", "deepskyblue", "darkorange"])
 
-            d3.select("#viz").append("g")
-                .attr("transform", "translate(" + margin + "," + margin + ")")
-                .call(yAxis);
-            d3.select("#viz").append("g")
-                .attr("transform", "translate(" + margin + "," + base + ")")
-                .call(xAxis);        
+            var svg_viz = d3.select("#viz")
+            //d3.select("#viz")
+                .append("g")
+                    .attr("transform", "translate(" + margin + "," + margin + ")")
+                    .call(yAxis)
+            //d3.select("#viz")
+                .append("g")
+                    .attr("transform", "translate(" + margin + "," + base + ")")
+                    .call(xAxis);        
             
             var filteredDataYear = filterByYear(data, 1990);
             console.log(filteredDataYear);
 
             // Add dots
-            d3.select("#viz")
-                .append('g')
+            //var svg =  d3.select("#viz")
+            
+            svg_viz.append('g')
                 .attr("transform", "translate(" + margin + "," + margin + ")")
                 .selectAll("dot")
                 .data(filteredDataYear) //data
@@ -142,39 +146,37 @@
             .domain(continents)
             .range(["red", "darkorange", "magenta", "blue", "darkorchid", "green"]) 
 
-            // Add dots
-            d3.select("svg")
-                .selectAll("dot")
+            // Paint circles again      
+            svg_viz.selectAll("circle")
+                .data(filteredDataYear)
                 .transition()
                 .duration(1000)
-                .datum(filteredDataYear)
-                .enter()
-                .append("circle")
                 .attr("cx", function (d) { return x(d.GDP);})
                 .attr("cy", function (d) { return y(d.Pct_Adults_Obese);} )
-                .attr("r", function (d){ return 2});
-        }
+                .attr("r", function (d){ return 3});
 
-        // When the button is changed, run the updateChart function
-        d3.select("#selectYear").on("change", function(d) {
-        // recover the option that has been chosen
-        //var selectedOption = d3.select(this).property("value")
-        // run the updateChart function with this selected option
-        updatePlotByYear(); 
-        })
+            }
 
-        var dropdown = d3
-        .select("#selectYear")
-        .selectAll("yearOptions")
-        .data(years)
-        .enter()
-        .append("option")
-        .text(function (d) {
-            return d;
-        }) // text showed in the menu
-        .attr("value", function (d) {
-            return d;
-        });
+            // When the button is changed, run the updateChart function
+            d3.select("#selectYear").on("change", function(d) {
+            // recover the option that has been chosen
+            //var selectedOption = d3.select(this).property("value")
+            // run the updateChart function with this selected option
+            updatePlotByYear(); 
+            })
+
+            var dropdown = d3
+            .select("#selectYear")
+            .selectAll("yearOptions")
+            .data(years)
+            .enter()
+            .append("option")
+            .text(function (d) {
+                return d;
+            }) // text showed in the menu
+            .attr("value", function (d) {
+                return d;
+            });
 
         }
 
