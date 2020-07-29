@@ -147,7 +147,7 @@
                 .selectAll("dot")
                 .transition()
                 .duration(1000)
-                .data(filteredDataYear)
+                .datum(filteredDataYear)
                 .enter()
                 .append("circle")
                 .attr("cx", function (d) { return x(d.GDP);})
