@@ -22,6 +22,13 @@
             </svg>     
         </div>
         <script>
+        function filterByYear(data, year){
+            return data.filter(function(d) {
+                return d.Year == year && d.GDP > 0;
+            }) 
+         }
+
+        const years = [1990, 1995, 2000, 2010, 2015];
 
         async function init() {
             //Read the data
@@ -113,32 +120,8 @@
                 .attr("text-anchor", "left")
                 .style("alignment-baseline", "middle")
 
-        }
-    
 
-        function filterByYear(data, year){
-            return data.filter(function(d) {
-                return d.Year == year && d.GDP > 0;
-            }) 
-         }
-
-        var years = [1990, 1995, 2000, 2010, 2015];
-
-        var dropdown = d3
-        .select("#selectYear")
-        .selectAll("yearOptions")
-        .data(years)
-        .enter()
-        .append("option")
-        .text(function (d) {
-            return d;
-        }) // text showed in the menu
-        .attr("value", function (d) {
-            return d;
-        });
-
-
-
+            
             // A function that update the plot for a given value
             function updatePlotByYear() {
             // Get the value of the button
@@ -178,7 +161,22 @@
         //var selectedOption = d3.select(this).property("value")
         // run the updateChart function with this selected option
         updatePlotByYear(); 
-    })
+        })
+
+        var dropdown = d3
+        .select("#selectYear")
+        .selectAll("yearOptions")
+        .data(years)
+        .enter()
+        .append("option")
+        .text(function (d) {
+            return d;
+        }) // text showed in the menu
+        .attr("value", function (d) {
+            return d;
+        });
+
+        }
 
         </script>
 
