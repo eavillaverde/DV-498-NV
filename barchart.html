@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+ <meta charset="utf-8">
+ <html>
+   <head>
+     <!-- Load d3.js -->
+     <script src="https://d3js.org/d3.v5.min.js"></script>
+   </head>
+   <body onload='init()'>
+        <div id="input">
+            <label style="float: left;font-size: smaller;" for="country">Choose a year:
+                <select class="box" id="selectYear" value=1990></select>
+            </label>
+        </div>
+
+        <div id="vizpanelbc">
+            <svg id="vizbc" width=600 height=600>
+            </svg>
+        </div>
+
+        <div id="legendpanelbc">
+            <svg id="legendbc" width=600 height=200>
+            </svg>     
+        </div>
+        <script>
+        function filterByYear(data, year){
+            return data.filter(function(d) {
+                return d.Year == year && d.GDP > 0;
+            }) 
+         }
+
+        const years = [1990, 1995, 2000, 2005, 2010, 2015];
+        const continents = ["Africa", "Asia", "Europe", "North America", "South America" , "Oceania"];
+        const colors = ["green", "magenta", "blue", "red", "deepskyblue", "darkorange", "darkorchid", "gold", "lime" ,"darkcyan",];
+
+        async function init() {
+            //Read the data
+            const data = await d3.csv("data/obesity_dataset.csv");
+
+            data.forEach(d=>{
+                d.GDP=+d.GDP; 
+                d.Pct_Adults_Obese=+d.Pct_Adults_Obese; 
+                d.Pct_Adults_Overweight=+d.Pct_Adults_Overweight;
+                d.Pct_Deaths_Obesity=+d.Pct_Deaths_Obesity;
+            });
+
+            var margin=50;
+            var width=500;
+            var height=500;
+            var base= margin+height;
+
+            // Add Y axis
+            var y = d3.scaleLinear()
+                .domain([0, 60])
+                .range([ height, 0]);
+            var yAxis = d3.axisLeft(y)
+                .tickValues([0,10,20,30,40,50,60])
+                .tickFormat(d3.format("~s"));
+            //Create x-axis
+            var x = d3.scaleLinear()
+                .domain([250, 100000])
+                .range([ 0, width ]);
+            var xAxis = d3.axisBottom(x)
+                .tickValues([10,20,30,40,50,60])
+                .tickFormat(d3.format("~s"));
+            
+ 
+            // Color scale: give me a specie name, I return a color
+            var color = d3.scaleOrdinal()
+            .domain(continents)
+            .range(colors);
+
+        }
