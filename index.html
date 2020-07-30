@@ -28,7 +28,9 @@
             }) 
          }
 
-        const years = [1990, 1995, 2000, 2010, 2015];
+        const years = [1990, 1995, 2000, 2005, 2010, 2015];
+        const continents = ["Africa", "Asia", "Europe", "North America", "South America" , "Oceania"];
+        const colors = ["green", "magenta", "blue", "red", "deepskyblue", "darkorange"];
 
         async function init() {
             //Read the data
@@ -61,11 +63,11 @@
                 .tickValues([250,1000,10000,25000,50000,75000,100000])
                 .tickFormat(d3.format("~s"));
             
-            var continents = ["Africa", "Asia", "Europe", "North America", "South America" , "Oceania"];
+ 
             // Color scale: give me a specie name, I return a color
             var color = d3.scaleOrdinal()
             .domain(continents)
-            .range(["green", "magenta", "blue", "red", "deepskyblue", "darkorange"])
+            .range(colors);
 
             var svg_viz = d3.select("#viz");
             //d3.select("#viz")
@@ -134,17 +136,17 @@
             var filteredDataYear = filterByYear(data, year);
             console.log(filteredDataYear);
 
-            var margin=50;
-            var width=500;
-            var height=500;
-            var base= margin+height;
+            //var margin=50;
+            //var width=500;
+            //var height=500;
+            //var base= margin+height;
 
-            var continents = ["Africa", "Asia", "Europe", "North America", "South America" , "Oceania"];
+            //const continents = ["Africa", "Asia", "Europe", "North America", "South America" , "Oceania"];
             
             // Color scale: give me a specie name, I return a color
-            var color = d3.scaleOrdinal()
-            .domain(continents)
-            .range(["red", "darkorange", "magenta", "blue", "darkorchid", "green"]) 
+            //var color = d3.scaleOrdinal()
+            //.domain(continents)
+            //.range(["red", "darkorange", "magenta", "blue", "darkorchid", "green"]) 
 
             // Paint circles again      
             svg_viz.selectAll("circle")
@@ -152,8 +154,9 @@
                 .transition()
                 .duration(1000)
                 .attr("cx", function (d) { return x(d.GDP);})
-                .attr("cy", function (d) { return y(d.Pct_Adults_Obese);} )
-                .attr("r", function (d){ return 3});
+                .attr("cy", function (d) { return y(d.Pct_Adults_Obese);})
+                .attr("r", function (d){ return 3})
+                .style("fill", function (d) { return color(d.Continent_Name);})
 
             }
 
