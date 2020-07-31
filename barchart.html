@@ -119,7 +119,9 @@
             // A function that update the plot for a given value
             function updateBarChart() {
                 // Get the value of the button
-                var year = d3.select("#selectYearbc").property("value") != null? d3.select("#selectYearbc").property("value") : 1990 ;
+                var tmpYear = d3.select("#selectYearbc").property("value");
+
+                var year = tmpYear ? tmpYear : 1990;
                 console.log("year:" + year); 
 
                 var filteredDataYear = filterByYear(data, year);
