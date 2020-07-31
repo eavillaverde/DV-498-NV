@@ -112,8 +112,7 @@
             
             // Initialize the barChart
             var barChart = svg_viz.selectAll("barChart")
-                .enter()
-                .append("rect")
+                
 
 
             // A function that update the plot for a given value
@@ -151,7 +150,10 @@
 
 
                 //Create BarChart  
-                barChart.selectAll("rect")
+                barChart
+                .enter()
+                .append("rect")
+                .selectAll("rect")
                 .data(top10)
                 .transition()
                 .duration(1000)
