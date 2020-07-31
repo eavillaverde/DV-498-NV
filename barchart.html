@@ -93,10 +93,16 @@
             //Create x-axis
             var x = d3.scaleLinear()
                 .domain(top10Countries)
-                //.range([ 0, width ]);
+                .range([ 0, width ]);
             var xAxis = d3.axisBottom(x)
-                //.tickValues(top10Countries)
-                //.tickFormat(d3.format("~s"));
+                .selectAll("text")
+                .attr("transform", "translate(-10,0)rotate(-45)")
+                .style("text-anchor", "end");
+
+            var x = d3.scaleBand()
+                .range([ 0, width ])
+                .domain(top10Countries)
+                .padding(0.2);            
 
             var svg_viz = d3.select("#vizbc");
             //d3.select("#viz")
@@ -112,6 +118,31 @@
             var color = d3.scaleOrdinal()
             .domain(top10Countries)
             .range(colors);
+
+
+
+
+
+            // When the button is changed, run the updateChart function
+            d3.select("#selectYearbc").on("change", function(d) {
+                // recover the option that has been chosen
+                //var selectedOption = d3.select(this).property("value")
+                // run the updateChart function with this selected option
+                updatePlotByYear(); 
+            })
+
+            var dropdown = d3
+            .select("#selectYearbc")
+            .selectAll("yearOptions")
+            .data(years)
+            .enter()
+            .append("option")
+            .text(function (d) {
+                return d;
+            }) // text showed in the menu
+            .attr("value", function (d) {
+                return d;
+            });
 
 
         }
