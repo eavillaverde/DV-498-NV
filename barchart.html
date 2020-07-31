@@ -97,9 +97,7 @@
             var x = d3.scaleBand()
                 .range([ 0, width ])
                 .domain(top10Countries)
-                .padding(0.2);       
-        
-            var xAxis = d3.axisBottom(x);
+                .padding(0.2);
 
             var svg_viz = d3.select("#vizbc");
             //d3.select("#viz")
@@ -107,9 +105,10 @@
                     .attr("transform", "translate(" + margin + "," + margin + ")")
                     .call(yAxis)
             //d3.select("#viz")
-            svg_viz.append("g")
+
+            var xAxis = svg_viz.append("g")
                     .attr("transform", "translate(" + margin + "," + base + ")")
-                    .call(xAxis)
+                    .call(d3.axisBottom(x))
                     .selectAll("text")
                     .attr("transform", "translate(-10,0)rotate(-45)")
                     .style("text-anchor", "end");    
@@ -154,7 +153,7 @@
                 // Update X axis
                 x.domain(top10Countries);
                 xAxis.call(d3.axisBottom(x));
-                
+
                 
                 // Paint circles again      
                 //svg_viz.selectAll("circle")
