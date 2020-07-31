@@ -65,6 +65,18 @@
                 d.Pct_Deaths_Obesity=+d.Pct_Deaths_Obesity;
             });
 
+            var filteredDataYear = filterByYear(data, 1990);
+            console.log(filteredDataYear);
+
+            var sortedData = sortDataPAO(filteredDataYear);
+            console.log(sortedData);
+
+            var top10 = getTop10(sortedData);
+            console.log(top10);
+
+            var top10Countries = top10.Entity;
+            console.log(top10Countries);
+
 
         }
 
