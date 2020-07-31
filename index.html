@@ -22,15 +22,15 @@
             </svg>     
         </div>
         <script>
+        const years = [1990, 1995, 2000, 2005, 2010, 2015];
+        const continents = ["Africa", "Asia", "Europe", "North America", "South America" , "Oceania"];
+        const colors = ["green", "magenta", "blue", "red", "deepskyblue", "darkorange"];
+
         function filterByYear(data, year){
             return data.filter(function(d) {
                 return d.Year == year && d.GDP > 0;
             }) 
          }
-
-        const years = [1990, 1995, 2000, 2005, 2010, 2015];
-        const continents = ["Africa", "Asia", "Europe", "North America", "South America" , "Oceania"];
-        const colors = ["green", "magenta", "blue", "red", "deepskyblue", "darkorange"];
 
         async function init() {
             //Read the data
