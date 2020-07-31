@@ -40,19 +40,20 @@
         }
 
         function sortDataPAOW(data){
-            return data.sort(function(a,b) { 
+            return data.sort(function(b,a) { 
                 return +a.Pct_Adults_Overweight - +b.Pct_Adults_Overweight; 
             });
         }
 
         function sortDataPDO(data){
-            return data.sort(function(a,b) { 
+            return data.sort(function(b,a) { 
                 return +a.Pct_Deaths_Obesity - +b.Pct_Deaths_Obesity; 
             });
         }
 
         function getTop10(data){
-            return data.slice(data.length-10, data.length);
+            //return data.slice(data.length-10, data.length);
+            return data.slice(0, 10);
         }
 
         async function init() {
