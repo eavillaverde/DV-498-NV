@@ -34,7 +34,8 @@
 
         function sortDataPAO(data){
             return data.sort(function(a,b) { 
-                return +a.Pct_Adults_Obese - +b.Pct_Adults_Obese; 
+                //return +a.Pct_Adults_Obese - +b.Pct_Adults_Obese; 
+                return  a.Pct_Adults_Obese - b.Pct_Adults_Obese; 
             });
         }
 
@@ -153,14 +154,14 @@
                 console.log(top10Countries);
 
                 // Paint circles again      
-                svg_viz.selectAll("circle")
-                    .data(filteredDataYear)
-                    .transition()
-                    .duration(1000)
-                    .attr("cx", function (d) { return x(d.GDP);})
-                    .attr("cy", function (d) { return y(d.Pct_Adults_Obese);})
-                    .attr("r", function (d){ return 5})
-                    .style("fill", function (d) { return color(d.Continent_Name);})
+                //svg_viz.selectAll("circle")
+                  //  .data(filteredDataYear)
+                   // .transition()
+                    //.duration(1000)
+                    //.attr("cx", function (d) { return x(d.GDP);})
+                    //.attr("cy", function (d) { return y(d.Pct_Adults_Obese);})
+                    //.attr("r", function (d){ return 5})
+                    //.style("fill", function (d) { return color(d.Continent_Name);})
 
             }
 
