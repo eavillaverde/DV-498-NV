@@ -151,22 +151,10 @@
                 var top10Countries =  d3.map(top10, function(d){return(d.Entity)}).keys();
                 console.log(top10Countries);
 
-                // Add X axis
-                var x = d3.scaleBand()
-                .range([ 0, width ])
-                .domain(top10Countries)
-                .padding(0.2);       
-            
-                var xAxis = d3.axisBottom(x);
-
-                var svg_viz = d3.select("#vizbc");
-
-                svg_viz.append("g")
-                        .attr("transform", "translate(" + margin + "," + base + ")")
-                        .call(xAxis)
-                        .selectAll("text")
-                        .attr("transform", "translate(-10,0)rotate(-45)")
-                        .style("text-anchor", "end");   
+                // Update X axis
+                x.domain(top10Countries);
+                xAxis.call(d3.axisBottom(x));
+                
                 
                 // Paint circles again      
                 //svg_viz.selectAll("circle")
