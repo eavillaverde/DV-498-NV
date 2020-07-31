@@ -5,7 +5,7 @@
      <!-- Load d3.js -->
      <script src="https://d3js.org/d3.v5.min.js"></script>
    </head>
-   <body onload='init()'>
+   <body onload="init()">
         <div id="input">
             <label style="float: left;font-size: smaller;" for="country">Choose a year:
                 <select class="box" id="selectYear" value=1990></select>
@@ -33,6 +33,12 @@
          }
 
         async function init() {
+
+            var margin=50;
+            var width=500;
+            var height=500;
+            var base= margin+height;
+
             //Read the data
             const data = await d3.csv("data/obesity_dataset.csv");
 
@@ -42,11 +48,6 @@
                 d.Pct_Adults_Overweight=+d.Pct_Adults_Overweight;
                 d.Pct_Deaths_Obesity=+d.Pct_Deaths_Obesity;
             });
-
-            var margin=50;
-            var width=500;
-            var height=500;
-            var base= margin+height;
 
             // Add Y axis
             var y = d3.scaleLinear()
