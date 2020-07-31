@@ -150,12 +150,16 @@
                 var top10Countries =  d3.map(top10, function(d){return(d.Entity)}).keys();
                 console.log(top10Countries);
 
+                color = d3.scaleOrdinal()
+                .domain(top10Countries)
+                .range(colors);
+
                 // Update X axis
                 x.domain(top10Countries);
                 xAxis.call(d3.axisBottom(x))
                     .selectAll("text")
-                    .attr("transform", "translate(-10,0)rotate(-45)")
-                    .style("text-anchor", "end");  
+                    //.attr("transform", "translate(-10,0)rotate(-45)")
+                    //.style("text-anchor", "end");  
 
                 svg_viz.selectAll("rect")
                 .data(top10)
