@@ -152,18 +152,21 @@
 
                 // Update X axis
                 x.domain(top10Countries);
-                xAxis.call(d3.axisBottom(x));
+                xAxis.call(d3.axisBottom(x))
+                    .selectAll("text")
+                    .attr("transform", "translate(-10,0)rotate(-45)")
+                    .style("text-anchor", "end");  
 
-                
-                // Paint circles again      
-                //svg_viz.selectAll("circle")
-                  //  .data(filteredDataYear)
-                   // .transition()
-                    //.duration(1000)
-                    //.attr("cx", function (d) { return x(d.GDP);})
-                    //.attr("cy", function (d) { return y(d.Pct_Adults_Obese);})
-                    //.attr("r", function (d){ return 5})
-                    //.style("fill", function (d) { return color(d.Continent_Name);})
+                svg_viz.selectAll("barChart")
+                .data(top10)
+                .enter()
+                .append("rect")
+                .attr("transform", "translate(" + margin + "," + margin + ")")
+                .attr("x", function(d) { return x(d.Entity); })
+                .attr("y", function(d) { return y(d.Pct_Adults_Obese); })
+                .attr("width", x.bandwidth())
+                .attr("height", function(d) { return height - y(d.Pct_Adults_Obese); })
+                .style("fill", function (d) { return color(d.Entity); })
 
             }
 
