@@ -157,10 +157,11 @@
                     .attr("transform", "translate(-10,0)rotate(-45)")
                     .style("text-anchor", "end");  
 
-                svg_viz.selectAll("barChart")
+                svg_viz.selectAll("rect")
                 .data(top10)
-                .enter()
-                .append("rect")
+                .transition()
+                .duration(1000)
+                //.enter()
                 .attr("transform", "translate(" + margin + "," + margin + ")")
                 .attr("x", function(d) { return x(d.Entity); })
                 .attr("y", function(d) { return y(d.Pct_Adults_Obese); })
