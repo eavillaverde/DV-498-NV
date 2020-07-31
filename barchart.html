@@ -92,7 +92,7 @@
                 .tickFormat(d3.format("~s"));
             //Create x-axis
             var x = d3.scaleLinear()
-                .domain([0, 10])
+                .domain(top10Countries)
                 .range([ 0, width ]);
             var xAxis = d3.axisBottom(x)
                 //.tickValues(top10Countries)
