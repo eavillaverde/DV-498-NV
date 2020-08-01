@@ -5,7 +5,7 @@
      <!-- Load d3.js -->
      <script src="https://d3js.org/d3.v5.min.js"></script>
    </head>
-   <body onload="init()">
+   <body onload="init(1)">
         <div id="inputbc">
             <div>
                 <label style="float: left;font-size: smaller;" for="country">Choose a year:
@@ -14,8 +14,8 @@
             </div>
             <div>
                 <!-- Add buttons -->
-                <button onclick="init()">Top 10 Obese</button>
-                <button onclick="updateBarChart(2)">Top 10 Overweight</button>
+                <button onclick="init(1)">Top 10 Obese</button>
+                <button onclick="init(2)">Top 10 Overweight</button>
             </div>
         </div>
 
@@ -63,7 +63,7 @@
             return data.slice(0, 10);
         }
 
-        async function init() {
+        async function init(ds) {
 
             var margin=50;
             var width=500;
@@ -201,25 +201,6 @@
                         })
                     .style("fill", function (d) { return color(d.Entity); })
 
-                /*
-                // Create the u variable
-                var u = svg.selectAll("rect")
-                    .data(data)
-
-                u
-                    .enter()
-                    .append("rect") // Add a new rect for each new elements
-                    .merge(u) // get the already existing elements as well
-                    .transition() // and apply changes to all of them
-                    .duration(1000)
-                    .attr("x", function(d) { return x(d.group); })
-                    .attr("y", function(d) { return y(d.value); })
-                    .attr("width", x.bandwidth())
-                    .attr("height", function(d) { return height - y(d.value); })
-                    .attr("fill", "#69b3a2")
-                    */
-
-
                             
                 //do I neeed to append g for margin?
                 /** svg_viz.selectAll("barChart")
@@ -238,7 +219,7 @@
 
 
             // Initialize the plot with the first dataset
-            updateBarChart(1);
+            updateBarChart(ds);
 
             // When the button is changed, run the updateChart function
             d3.select("#selectYearbc").on("change", function(d) {
