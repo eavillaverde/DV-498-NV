@@ -5,11 +5,18 @@
      <!-- Load d3.js -->
      <script src="https://d3js.org/d3.v5.min.js"></script>
    </head>
-   <body onload="init()">
+   <body onload="init(1)">
         <div id="inputbc">
-            <label style="float: left;font-size: smaller;" for="country">Choose a year:
+            <div>
+                <label style="float: left;font-size: smaller;" for="country">Choose a year:
                 <select class="box" id="selectYearbc" value=1990></select>
-            </label>
+                </label>
+            </div>
+            <div>
+                <!-- Add buttons -->
+                <button onclick="init(1)">Top 10 Obese</button>
+                <button onclick="init(2)">Top 10 Overweight</button>
+            </div>
         </div>
 
         <div id="vizpanelbc">
@@ -56,7 +63,7 @@
             return data.slice(0, 10);
         }
 
-        async function init() {
+        async function init(ds) {
 
             var margin=50;
             var width=500;
@@ -90,16 +97,16 @@
 
             // Initialize Y axis
             var y = d3.scaleLinear()
-                .domain([0, 60])
                 .range([ height, 0]);
             
             // Add Y axis
             var yAxis = svg_viz.append("g")
                 .attr("transform", "translate(" + margin + "," + margin + ")")
+                /*
                 .call(d3.axisLeft(y)
                     .tickValues([0,10,20,30,40,50,60])
                     .tickFormat(d3.format("~s"))
-                );
+                );*/
 
             // Initialize X axis
             var x = d3.scaleBand()
@@ -114,7 +121,7 @@
             //var barChart = svg_viz.selectAll("barChart")
                 
             // A function that update the plot for a given value
-            function updateBarChart() {
+            function updateBarChart(ds) {
                 // Get the value of the button
                 var tmpYear = d3.select("#selectYearbc").property("value");
 
@@ -124,7 +131,9 @@
                 var filteredDataYear = filterByYear(data, year);
                 console.log(filteredDataYear);
 
-                var sortedData = sortDataPAO(filteredDataYear);
+                //sortDataPAOW(data)
+
+                var sortedData = ds == 1? sortDataPAO(filteredDataYear) : sortDataPAOW(filteredDataYear);
                 console.log(sortedData);
 
                 var top10 = getTop10(sortedData);
@@ -139,14 +148,26 @@
                 .domain(top10Countries)
                 .range(colors);
 
+                //Update Y Axis
+                if(ds==1) {
+                    y.domain([0, d3.max(top10, function(d) {return y(d.Pct_Adults_Obese);}) ]); 
+                } else {
+                    y.domain([0, d3.max(top10, function(d) {return y(d.Pct_Adults_Owerweight);}) ]);
+                }
+
+                yAxis.transition().duration(1000).call(d3.axisLeft(y));
+
+
                 // Update X axis
                 x.domain(top10Countries);
-                xAxis.call(d3.axisBottom(x))
+                xAxis.transition().duration(1000).call(d3.axisBottom(x))
                     .selectAll("text")
                     .attr("transform", "translate(-10,0)rotate(-45)")
                     .style("text-anchor", "end"); 
 
-                
+
+  
+
                 /*
                 //Create BarChart  
                 svg_viz.selectAll("barChart")
@@ -176,29 +197,21 @@
                     .duration(1000)
                     .attr("transform", "translate(" + margin + "," + margin + ")")
                     .attr("x", function(d) { return x(d.Entity); })
-                    .attr("y", function(d) { return y(d.Pct_Adults_Obese); })
+                    .attr("y", function(d) { 
+                        if(ds==1) {
+                            return y(d.Pct_Adults_Obese);
+                        } else {
+                            return y(d.Pct_Adults_Owerweight);
+                        }  })
                     .attr("width", x.bandwidth())
-                    .attr("height", function(d) { return height - y(d.Pct_Adults_Obese); })
+                    .attr("height", function(d) { 
+                        if(ds==1) {
+                            return height - y(d.Pct_Adults_Obese); 
+                        } else {
+                            return height - y(d.Pct_Adults_Overweight); 
+                        }
+                        })
                     .style("fill", function (d) { return color(d.Entity); })
-
-                /*
-                // Create the u variable
-                var u = svg.selectAll("rect")
-                    .data(data)
-
-                u
-                    .enter()
-                    .append("rect") // Add a new rect for each new elements
-                    .merge(u) // get the already existing elements as well
-                    .transition() // and apply changes to all of them
-                    .duration(1000)
-                    .attr("x", function(d) { return x(d.group); })
-                    .attr("y", function(d) { return y(d.value); })
-                    .attr("width", x.bandwidth())
-                    .attr("height", function(d) { return height - y(d.value); })
-                    .attr("fill", "#69b3a2")
-                    */
-
 
                             
                 //do I neeed to append g for margin?
@@ -218,22 +231,25 @@
 
 
             // Initialize the plot with the first dataset
-            updateBarChart();
+            updateBarChart(ds);
 
             // When the button is changed, run the updateChart function
             d3.select("#selectYearbc").on("change", function(d) {
                 // recover the option that has been chosen
                 //var selectedOption = d3.select(this).property("value")
                 // run the updateChart function with this selected option
-                updateBarChart(); 
+                updateBarChart(1); 
             })
 
             var dropdown = d3
             .select("#selectYearbc")
             .selectAll("yearOptions")
             .data(years)
+
+            dropdown
             .enter()
             .append("option")
+            .merge(dropdown)
             .text(function (d) {
                 return d;
             }) // text showed in the menu
@@ -248,5 +264,3 @@
 
 </body>
 </html>
-
-
