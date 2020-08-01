@@ -149,13 +149,11 @@
                 .range(colors);
 
                 //Update Y Axis
-                y.domain([0, d3.max(top10, function(d) { 
-                    if(ds==1) {
-                            return y(d.Pct_Adults_Obese);
-                        } else {
-                            return y(d.Pct_Adults_Owerweight);
-                        }
-                }) ]);
+                if(ds==1) {
+                    y.domain([0, d3.max(top10, function(d) {return y(d.Pct_Adults_Obese);}) ]); 
+                } else {
+                    y.domain([0, d3.max(top10, function(d) {return y(d.Pct_Adults_Owerweight);}) ]);
+                }
 
                 yAxis.transition().duration(1000).call(d3.axisLeft(y));
 
