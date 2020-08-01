@@ -171,7 +171,7 @@
                 barChart
                     .enter()
                     .append("rect")
-                    //.merge(barChart)                   
+                    .merge(barChart)                   
                     .transition() // and apply changes to all of them
                     .duration(1000)
                     .attr("transform", "translate(" + margin + "," + margin + ")")
