@@ -197,7 +197,13 @@
                 svg_viz.selectAll(".Yaxis")
                         .transition()
                         .duration(1000)
-                        .call(d3.axisLeft().scale(y));
+                        .call(d3.axisLeft().scale(y))
+                        .append("text")
+                        .attr("transform", "rotate(-90)")
+                        .attr("y", 6)
+                        .attr("dy", ".71em")
+                        .style("text-anchor", "end")
+                        .text("Rate %");
 
                 //yAxis.transition().duration(1000).call(d3.axisLeft(y));
 
@@ -259,7 +265,7 @@
                         } else if(ds==2){
                             return height - y(d.Pct_Adults_Overweight); 
                         } else{
-                            return y(d.Pct_Deaths_Obesity);
+                            return height - y(d.Pct_Deaths_Obesity);
                         } 
                     })
                     .style("fill", function (d) { return color(d.Entity); })
