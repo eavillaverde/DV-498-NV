@@ -2,10 +2,55 @@
  <meta charset="utf-8">
  <html>
    <head>
-     <!-- Load d3.js -->
-     <script src="https://d3js.org/d3.v5.min.js"></script>
-   </head>
+    <!-- Load d3.js -->
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <title>Impact of Obesity Around the World</title>
+    <style>
+    #headerDiv {
+      background-image:linear-gradient(rgb(255, 182, 255),lightpink);
+      text-align: center;
+      height: 80px;
+      width: auto;
+    }
+    h1{
+      color:indigo;
+    }
+    body{
+     color:indigo;
+     font: 18px Arial, sans-serif;
+    }
+    #groupButton{
+     color:indigo;
+     font: 18px Arial, sans-serif;
+     text-align: center;
+    }
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: lightpink;
+    }
+    li {
+        float: left;
+    }
+    li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+    }
+    li a:hover {
+        background-color: salmon;
+    }
+    </style>
+    </head>
+
    <body onload="init()">
+        <div id="headerDiv">
+            <h1>Obesity</h1>
+        </div>
         <div id="input">
             <label style="float: left;font-size: smaller;" for="country">Choose a year:
                 <select class="box" id="selectYear" value=1990></select>
