@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+ <meta charset="utf-8">
+ <html>
+   <head>
+     <!-- Load d3.js -->
+     <script src="https://d3js.org/d3.v5.min.js"></script>
+   </head>
+   <body onload="init()">
+        <div id="inputbc">
+            <label style="float: left;font-size: smaller;" for="country">Choose a year:
+                <select class="box" id="selectYearbc" value=1990></select>
+            </label>
+        </div>
+
+        <div id="vizpanelbc">
+            <svg id="vizbc" width=600 height=650>
+            </svg>
+        </div>
+
+        <div id="legendpanelbc">
+            <svg id="legendbc" width=600 height=200>
+            </svg>     
+        </div>
+        <script>
+        const years = [1990, 1995, 2000, 2005, 2010, 2015];
+        const continents = ["Africa", "Asia", "Europe", "North America", "South America" , "Oceania"];
+        const colors = ["green", "magenta", "blue", "red", "deepskyblue", "darkorange", "darkorchid", "gold", "lime" ,"darkcyan"];
+
+        function filterByYear(data, year){
+            return data.filter(function(d) {
+                return d.Year == year && d.GDP > 0 ;
+            }); 
+         }
+
+        function sortDataPAO(data){
+            return data.sort(function(b,a) { 
+                //return +a.Pct_Adults_Obese - +b.Pct_Adults_Obese; 
+                return  a.Pct_Adults_Obese - b.Pct_Adults_Obese; 
+            });
+        }
+
+        function sortDataPAOW(data){
+            return data.sort(function(b,a) { 
+                return +a.Pct_Adults_Overweight - +b.Pct_Adults_Overweight; 
+            });
+        }
+
+        function sortDataPDO(data){
+            return data.sort(function(b,a) { 
+                return +a.Pct_Deaths_Obesity - +b.Pct_Deaths_Obesity; 
+            });
+        }
+
+        function getTop10(data){
+            //return data.slice(data.length-10, data.length);
+            return data.slice(0, 10);
+        }
+
+        async function init() {
+
+            var margin=50;
+            var width=500;
+            var height=500;
+            var base= margin+height;
+
+            //Read the data
+            const data = await d3.csv("data/obesity_dataset.csv");
+
+            data.forEach(d=>{
+                d.GDP=+d.GDP; 
+                d.Pct_Adults_Obese=+d.Pct_Adults_Obese; 
+                d.Pct_Adults_Overweight=+d.Pct_Adults_Overweight;
+                d.Pct_Deaths_Obesity=+d.Pct_Deaths_Obesity;
+            });
+
+            /*
+            var filteredDataYear = filterByYear(data, 1990);
+            console.log(filteredDataYear);
+
+            var sortedData = sortDataPAO(filteredDataYear);
+            console.log(sortedData);
+
+            var top10 = getTop10(sortedData);
+            console.log(top10);
+
+            var top10Countries =  d3.map(top10, function(d){return(d.Entity)}).keys();
+            console.log(top10Countries); */
+
+            var svg_viz = d3.select("#vizbc");
+
+            // Initialize Y axis
+            var y = d3.scaleLinear()
+                .domain([0, 60])
+                .range([ height, 0]);
+            
+            // Add Y axis
+            var yAxis = svg_viz.append("g")
+                .attr("transform", "translate(" + margin + "," + margin + ")")
+                .call(d3.axisLeft(y)
+                    .tickValues([0,10,20,30,40,50,60])
+                    .tickFormat(d3.format("~s"))
+                );
+
+            // Initialize X axis
+            var x = d3.scaleBand()
+                .range([ 0, width ])
+                .padding(0.2);
+            
+            var xAxis = svg_viz.append("g")
+                .attr("transform", "translate(" + margin + "," + base + ")")
+
+            
+            // Initialize the barChart
+            //var barChart = svg_viz.selectAll("barChart")
+                
+            // A function that update the plot for a given value
+            function updateBarChart() {
+                // Get the value of the button
+                var tmpYear = d3.select("#selectYearbc").property("value");
+
+                var year = tmpYear ? tmpYear : 1990;
+                console.log("year:" + year); 
+
+                var filteredDataYear = filterByYear(data, year);
+                console.log(filteredDataYear);
+
+                var sortedData = sortDataPAO(filteredDataYear);
+                console.log(sortedData);
+
+                var top10 = getTop10(sortedData);
+                console.log(top10);
+
+                var top10Countries =  d3.map(top10, function(d){return(d.Entity)}).keys();
+                console.log(top10Countries);
+
+
+                // Color scale: give me a specie name, I return a color
+                color = d3.scaleOrdinal()
+                .domain(top10Countries)
+                .range(colors);
+
+                // Update X axis
+                x.domain(top10Countries);
+                xAxis.call(d3.axisBottom(x))
+                    .selectAll("text")
+                    .attr("transform", "translate(-10,0)rotate(-45)")
+                    .style("text-anchor", "end"); 
+
+                
+                /*
+                //Create BarChart  
+                svg_viz.selectAll("barChart")
+                .enter()
+                .append("rect")
+                //.selectAll("rect")
+                .data(top10)
+                .transition()
+                .duration(1000)
+                //.enter()
+                .attr("transform", "translate(" + margin + "," + margin + ")")
+                .attr("x", function(d) { return x(d.Entity); })
+                .attr("y", function(d) { return y(d.Pct_Adults_Obese); })
+                .attr("width", x.bandwidth())
+                .attr("height", function(d) { return height - y(d.Pct_Adults_Obese); })
+                .style("fill", function (d) { return color(d.Entity); })
+                */
+
+                var barChart = svg_viz.selectAll("rect")
+                    .data(top10)
+                
+                barChart
+                    .enter()
+                    .append("rect")
+                    .merge(barChart)                   
+                    .transition() // and apply changes to all of them
+                    .duration(1000)
+                    .attr("transform", "translate(" + margin + "," + margin + ")")
+                    .attr("x", function(d) { return x(d.Entity); })
+                    .attr("y", function(d) { return y(d.Pct_Adults_Obese); })
+                    .attr("width", x.bandwidth())
+                    .attr("height", function(d) { return height - y(d.Pct_Adults_Obese); })
+                    .style("fill", function (d) { return color(d.Entity); })
+
+                /*
+                // Create the u variable
+                var u = svg.selectAll("rect")
+                    .data(data)
+
+                u
+                    .enter()
+                    .append("rect") // Add a new rect for each new elements
+                    .merge(u) // get the already existing elements as well
+                    .transition() // and apply changes to all of them
+                    .duration(1000)
+                    .attr("x", function(d) { return x(d.group); })
+                    .attr("y", function(d) { return y(d.value); })
+                    .attr("width", x.bandwidth())
+                    .attr("height", function(d) { return height - y(d.value); })
+                    .attr("fill", "#69b3a2")
+                    */
+
+
+                            
+                //do I neeed to append g for margin?
+                /** svg_viz.selectAll("barChart")
+                    .data(top10)
+                    .enter()
+                    .append("rect")
+                    .attr("transform", "translate(" + margin + "," + margin + ")")
+                    .attr("x", function(d) { return x(d.Entity); })
+                    .attr("y", function(d) { return y(d.Pct_Adults_Obese); })
+                    .attr("width", x.bandwidth())
+                    .attr("height", function(d) { return height - y(d.Pct_Adults_Obese); })
+                    .style("fill", function (d) { return color(d.Entity); })
+                    //.attr("fill", "#69b3a2") **/
+
+            }
+
+
+            // Initialize the plot with the first dataset
+            updateBarChart();
+
+            // When the button is changed, run the updateChart function
+            d3.select("#selectYearbc").on("change", function(d) {
+                // recover the option that has been chosen
+                //var selectedOption = d3.select(this).property("value")
+                // run the updateChart function with this selected option
+                updateBarChart(); 
+            })
+
+            var dropdown = d3
+            .select("#selectYearbc")
+            .selectAll("yearOptions")
+            .data(years)
+            .enter()
+            .append("option")
+            .text(function (d) {
+                return d;
+            }) // text showed in the menu
+            .attr("value", function (d) {
+                return d;
+            });
+
+
+        }
+
+    </script>
+
+</body>
+</html>
+
+
