@@ -10,6 +10,9 @@
             <label style="float: left;font-size: smaller;" for="country">Choose a year:
                 <select class="box" id="selectYearbc" value=1990></select>
             </label>
+            <!-- Add buttons -->
+            <button onclick="updateBarChart(1)">Top 10 Obese</button>
+            <button onclick="updateBarChart(2)">Top 10 Overweight</button>
         </div>
 
         <div id="vizpanelbc">
@@ -114,7 +117,7 @@
             //var barChart = svg_viz.selectAll("barChart")
                 
             // A function that update the plot for a given value
-            function updateBarChart() {
+            function updateBarChart(ds) {
                 // Get the value of the button
                 var tmpYear = d3.select("#selectYearbc").property("value");
 
@@ -124,7 +127,9 @@
                 var filteredDataYear = filterByYear(data, year);
                 console.log(filteredDataYear);
 
-                var sortedData = sortDataPAO(filteredDataYear);
+                //sortDataPAOW(data)
+
+                var sortedData = ds == 1? sortDataPAO(filteredDataYear) : sortDataPAOW(filteredDataYear);
                 console.log(sortedData);
 
                 var top10 = getTop10(sortedData);
@@ -176,9 +181,20 @@
                     .duration(1000)
                     .attr("transform", "translate(" + margin + "," + margin + ")")
                     .attr("x", function(d) { return x(d.Entity); })
-                    .attr("y", function(d) { return y(d.Pct_Adults_Obese); })
+                    .attr("y", function(d) { 
+                        if(ds==1) {
+                            return y(d.Pct_Adults_Obese);
+                        } else {
+                            return y(d.Pct_Adults_Owerweight);
+                        }  })
                     .attr("width", x.bandwidth())
-                    .attr("height", function(d) { return height - y(d.Pct_Adults_Obese); })
+                    .attr("height", function(d) { 
+                        if(ds==1) {
+                            return height - y(d.Pct_Adults_Obese); 
+                        } else {
+                            return height - y(d.Pct_Adults_Overweight); 
+                        }
+                        })
                     .style("fill", function (d) { return color(d.Entity); })
 
                 /*
@@ -218,14 +234,14 @@
 
 
             // Initialize the plot with the first dataset
-            updateBarChart();
+            updateBarChart(1);
 
             // When the button is changed, run the updateChart function
             d3.select("#selectYearbc").on("change", function(d) {
                 // recover the option that has been chosen
                 //var selectedOption = d3.select(this).property("value")
                 // run the updateChart function with this selected option
-                updateBarChart(); 
+                updateBarChart(1); 
             })
 
             var dropdown = d3
