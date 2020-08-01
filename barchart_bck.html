@@ -154,16 +154,17 @@
                 //Update Y Axis
                 var min, max;
                 if(ds==1) {
-                    min = d3.min(top10, function(d) {return y(d.Pct_Adults_Obese);})
-                    max = d3.max(top10, function(d) {return y(d.Pct_Adults_Obese);})              
+                    //min = d3.min(top10, function(d) {return y(d.Pct_Adults_Obese);})
+                    max = d3.max(top10, function(d) {return(d.Pct_Adults_Obese);})              
                     
                 } else {
-                    min = d3.min(top10, function(d) {return y(d.Pct_Adults_Owerweight);})
-                    max = d3.max(top10, function(d) {return y(d.Pct_Adults_Owerweight);})
+                    //min = d3.min(top10, function(d) {return y(d.Pct_Adults_Owerweight);})
+                    max = d3.max(top10, function(d) {return(d.Pct_Adults_Owerweight);})
                 }
 
-                console.log("min = " + min + "  max = " + max)
-                y.domain([min, max]); 
+                //console.log("min = " + min + "  max = " + max)
+                console.log("max = " + max)
+                y.domain([0, max]); 
 
                 svg_viz.selectAll(".Yaxis")
                         .transition()
