@@ -198,6 +198,8 @@
                         .transition()
                         .duration(1000)
                         .call(d3.axisLeft().scale(y))
+                        
+                svg_viz.selectAll(".Yaxis")
                         .append("g")
                         .append("text")
                         // .attr("transform", "translate(" + margin + "," + margin + ")")
