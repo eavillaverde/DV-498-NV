@@ -115,6 +115,7 @@
                 .padding(0.2);
             
             var xAxis = svg_viz.append("g")
+                .attr("class","Xaxis")
                 .attr("transform", "translate(" + margin + "," + base + ")")
 
                 
@@ -155,11 +156,11 @@
                 var min, max;
                 if(ds==1) {
                     //min = d3.min(top10, function(d) {return y(d.Pct_Adults_Obese);})
-                    max = d3.max(top10, function(d) {return(d.Pct_Adults_Obese);})              
+                    max = d3.max(top10, function(d) {return (d.Pct_Adults_Obese);})              
                     
                 } else {
-                    //min = d3.min(top10, function(d) {return y(d.Pct_Adults_Owerweight);})
-                    max = d3.max(top10, function(d) {return(d.Pct_Adults_Owerweight);})
+                    //min = d3.min(top10, function(d) {return y(d.Pct_Adults_Overweight);})
+                    max = d3.max(top10, function(d) {return (d.Pct_Adults_Overweight);})
                 }
 
                 //console.log("min = " + min + "  max = " + max)
@@ -175,13 +176,16 @@
 
                 // Update X axis
                 x.domain(top10Countries);
-                xAxis.transition().duration(1000).call(d3.axisBottom(x))
+                svg_viz.selectAll(".Xaxis")
+                    .transition()
+                    .duration(1000)
+                    .call(d3.axisBottom(x))
                     .selectAll("text")
                     .attr("transform", "translate(-10,0)rotate(-45)")
                     .style("text-anchor", "end"); 
+                
+                //xAxis.transition().duration(1000).call(d3.axisBottom(x))
 
-
-  
 
                 /*
                 //Create BarChart  
@@ -216,7 +220,7 @@
                         if(ds==1) {
                             return y(d.Pct_Adults_Obese);
                         } else {
-                            return y(d.Pct_Adults_Owerweight);
+                            return y(d.Pct_Adults_Overweight);
                         }  })
                     .attr("width", x.bandwidth())
                     .attr("height", function(d) { 
@@ -264,7 +268,7 @@
             dropdown
             .enter()
             .append("option")
-            .merge(dropdown)
+            //.merge(dropdown)
             .text(function (d) {
                 return d;
             }) // text showed in the menu
