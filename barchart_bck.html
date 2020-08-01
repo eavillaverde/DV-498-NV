@@ -222,8 +222,16 @@
                     .style("text-anchor", "end"); 
                 
                 svg_viz.selectAll(".Xaxis")
-                    .append("g")
+                    .append("g")   
+                    .append("text")         
+                    attr("class","XaxisText")
+
+                    var xText = xText.selectAll(".XaxisText")
+                    .enter()
                     .append("text")
+                    .merge(xtexT)                   
+                    .transition() // and apply changes to all of them
+                    .duration(1000)
                     .attr("y", 4) 
                     .attr("x", base -20)
                     //.style("text-anchor", "end")
