@@ -226,10 +226,10 @@
                     .append("text")         
                     .attr("class","XaxisText")
 
-                    var xText = xText.selectAll(".XaxisText")
+                    var xText = svg_viz.selectAll(".XaxisText")
                     .enter()
                     .append("text")
-                    .merge(xtexT)                   
+                    .merge(xText)                   
                     .transition() // and apply changes to all of them
                     .duration(1000)
                     .attr("y", 4) 
