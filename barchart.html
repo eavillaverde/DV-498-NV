@@ -146,7 +146,8 @@
                     .attr("transform", "translate(-10,0)rotate(-45)")
                     .style("text-anchor", "end"); 
 
-
+                
+                /*
                 //Create BarChart  
                 svg_viz.selectAll("barChart")
                 .enter()
@@ -162,23 +163,53 @@
                 .attr("width", x.bandwidth())
                 .attr("height", function(d) { return height - y(d.Pct_Adults_Obese); })
                 .style("fill", function (d) { return color(d.Entity); })
+                */
 
+                var barChart = svg_viz.selectAll("rect")
+                    .data(top10)
+                    .enter()
+                    .append("rect")
+                    .transition() // and apply changes to all of them
+                    .duration(1000)
+                    .attr("transform", "translate(" + margin + "," + margin + ")")
+                    .attr("x", function(d) { return x(d.Entity); })
+                    .attr("y", function(d) { return y(d.Pct_Adults_Obese); })
+                    .attr("width", x.bandwidth())
+                    .attr("height", function(d) { return height - y(d.Pct_Adults_Obese); })
+                    .style("fill", function (d) { return color(d.Entity); })
 
+                /*
+                // Create the u variable
+                var u = svg.selectAll("rect")
+                    .data(data)
+
+                u
+                    .enter()
+                    .append("rect") // Add a new rect for each new elements
+                    .merge(u) // get the already existing elements as well
+                    .transition() // and apply changes to all of them
+                    .duration(1000)
+                    .attr("x", function(d) { return x(d.group); })
+                    .attr("y", function(d) { return y(d.value); })
+                    .attr("width", x.bandwidth())
+                    .attr("height", function(d) { return height - y(d.value); })
+                    .attr("fill", "#69b3a2")
+                    */
 
 
                             
-            //do I neeed to append g for margin?
-            /** svg_viz.selectAll("barChart")
-                .data(top10)
-                .enter()
-                .append("rect")
-                .attr("transform", "translate(" + margin + "," + margin + ")")
-                .attr("x", function(d) { return x(d.Entity); })
-                .attr("y", function(d) { return y(d.Pct_Adults_Obese); })
-                .attr("width", x.bandwidth())
-                .attr("height", function(d) { return height - y(d.Pct_Adults_Obese); })
-                .style("fill", function (d) { return color(d.Entity); })
-                //.attr("fill", "#69b3a2") **/
+                //do I neeed to append g for margin?
+                /** svg_viz.selectAll("barChart")
+                    .data(top10)
+                    .enter()
+                    .append("rect")
+                    .attr("transform", "translate(" + margin + "," + margin + ")")
+                    .attr("x", function(d) { return x(d.Entity); })
+                    .attr("y", function(d) { return y(d.Pct_Adults_Obese); })
+                    .attr("width", x.bandwidth())
+                    .attr("height", function(d) { return height - y(d.Pct_Adults_Obese); })
+                    .style("fill", function (d) { return color(d.Entity); })
+                    //.attr("fill", "#69b3a2") **/
 
             }
 
