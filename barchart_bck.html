@@ -198,10 +198,12 @@
                         .transition()
                         .duration(1000)
                         .call(d3.axisLeft().scale(y))
-                        .append("text")
+
+                svg_viz.append("text")
+                        // .attr("transform", "translate(" + margin + "," + margin + ")")
                         .attr("transform", "rotate(-90)")
-                        .attr("y", 6)
-                        .attr("dy", ".71em")
+                        .attr("y", margin)
+                        .attr("x", maargin - 20)
                         .style("text-anchor", "end")
                         .text("Rate %");
 
