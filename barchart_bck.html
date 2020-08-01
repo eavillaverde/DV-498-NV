@@ -202,11 +202,11 @@
                 svg_viz.selectAll(".Yaxis")
                         .append("g")
                         .append("text")
-                        // .attr("transform", "translate(" + margin + "," + margin + ")")
                         .attr("transform", "rotate(-90)")
                         .attr("y", -25) 
                         .attr("x", -15)
-                        .style("text-anchor", "end")
+                        //.style("text-anchor", "end")
+                        .style("fill","black")
                         .text("Rate %");
 
                 //yAxis.transition().duration(1000).call(d3.axisLeft(y));
