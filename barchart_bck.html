@@ -8,14 +8,17 @@
    <body onload="init(1)">
         <div id="inputbc">
             <div>
-                <label style="float: left;font-size: smaller;" for="country">Choose a year:
-                <select class="box" id="selectYearbc" value=1990></select>
+                <label style="float: left;font-size: smaller;" for="country">Choose a Year:
+                    <select class="box" id="selectYearbc" value=1990></select>
                 </label>
             </div>
             <div>
-                <!-- Add buttons -->
-                <button onclick="init(1)">Top 10 Obese</button>
-                <button onclick="init(2)">Top 10 Overweight</button>
+                <label style="float: left;font-size: smaller;">Select as Rate:
+                    <!-- Add buttons -->
+                    <button onclick="init(1)">Top 10 Obesity</button>
+                    <button onclick="init(2)">Top 10 Overweight</button>
+                    <button onclick="init(3)">Top 10 Death/Obesity</button>
+                </label>
             </div>
         </div>
 
@@ -137,7 +140,8 @@
 
                 //sortDataPAOW(data)
 
-                var sortedData = ds == 1? sortDataPAO(filteredDataYear) : sortDataPAOW(filteredDataYear);
+                var sortedData = ds == 1? sortDataPAO(filteredDataYear) : 
+                                 ds == 2? sortDataPAOW(filteredDataYear) : sortDataPDO(filteredDataYear);
                 console.log(sortedData);
 
                 var top10 = getTop10(sortedData);
@@ -173,14 +177,17 @@
                 });
 
                 //Update Y Axis
-                var min, max;
+                var max;
                 if(ds==1) {
                     //min = d3.min(top10, function(d) {return y(d.Pct_Adults_Obese);})
                     max = d3.max(top10, function(d) {return (d.Pct_Adults_Obese);})              
                     
-                } else {
+                } else if (ds==2) {
                     //min = d3.min(top10, function(d) {return y(d.Pct_Adults_Overweight);})
                     max = d3.max(top10, function(d) {return (d.Pct_Adults_Overweight);})
+                } else {
+                    //min = d3.min(top10, function(d) {return y(d.Pct_Deaths_Obesity);})
+                    max = d3.max(top10, function(d) {return (d.Pct_Deaths_Obesity);})
                 }
 
                 //console.log("min = " + min + "  max = " + max)
@@ -239,17 +246,22 @@
                     .attr("y", function(d) { 
                         if(ds==1) {
                             return y(d.Pct_Adults_Obese);
-                        } else {
+                        } else if(ds==2){
                             return y(d.Pct_Adults_Overweight);
-                        }  })
+                        } else{
+                            return y(d.Pct_Deaths_Obesity);
+                        }  
+                    })
                     .attr("width", x.bandwidth())
                     .attr("height", function(d) { 
                         if(ds==1) {
                             return height - y(d.Pct_Adults_Obese); 
-                        } else {
+                        } else if(ds==2){
                             return height - y(d.Pct_Adults_Overweight); 
-                        }
-                        })
+                        } else{
+                            return y(d.Pct_Deaths_Obesity);
+                        } 
+                    })
                     .style("fill", function (d) { return color(d.Entity); })
 
                             
