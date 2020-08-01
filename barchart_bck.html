@@ -200,14 +200,14 @@
                         .call(d3.axisLeft().scale(y))
                         
                 svg_viz.selectAll(".Yaxis")
-                        .append("g")
-                        .append("text")
-                        .attr("transform", "rotate(-90)")
-                        .attr("y", -25) 
-                        .attr("x", -15)
-                        //.style("text-anchor", "end")
-                        .style("fill","black")
-                        .text("Rate %");
+                    .append("g")
+                    .append("text")
+                    .attr("transform", "rotate(-90)")
+                    .attr("y", -25) 
+                    .attr("x", -15)
+                    //.style("text-anchor", "end")
+                    .style("fill","black")
+                    .text("Rate %");
 
                 //yAxis.transition().duration(1000).call(d3.axisLeft(y));
 
@@ -224,8 +224,8 @@
                 svg_viz.selectAll(".Xaxis")
                     .append("g")
                     .append("text")
-                    .attr("y", -15) 
-                    .attr("x", -10)
+                    .attr("y", 10) 
+                    .attr("x", base)
                     //.style("text-anchor", "end")
                     .style("fill","black")
                     .text("Countries");
