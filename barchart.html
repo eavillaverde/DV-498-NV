@@ -7,12 +7,16 @@
    </head>
    <body onload="init()">
         <div id="inputbc">
-            <label style="float: left;font-size: smaller;" for="country">Choose a year:
+            <div>
+                <label style="float: left;font-size: smaller;" for="country">Choose a year:
                 <select class="box" id="selectYearbc" value=1990></select>
-            </label>
-            <!-- Add buttons -->
-            <button onclick="updateBarChart(1)">Top 10 Obese</button>
-            <button onclick="updateBarChart(2)">Top 10 Overweight</button>
+                </label>
+            </div>
+            <div>
+                <!-- Add buttons -->
+                <button onclick="initpwd()">Top 10 Obese</button>
+                <button onclick="updateBarChart(2)">Top 10 Overweight</button>
+            </div>
         </div>
 
         <div id="vizpanelbc">
