@@ -167,9 +167,11 @@
 
                 var barChart = svg_viz.selectAll("rect")
                     .data(top10)
+                
+                barChart
                     .enter()
-                    .merge()
                     .append("rect")
+                    //.merge(barChart)                   
                     .transition() // and apply changes to all of them
                     .duration(1000)
                     .attr("transform", "translate(" + margin + "," + margin + ")")
