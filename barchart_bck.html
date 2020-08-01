@@ -101,6 +101,7 @@
             
             // Add Y axis
             var yAxis = svg_viz.append("g")
+                .attr("class","Yaxis")
                 .attr("transform", "translate(" + margin + "," + margin + ")")
                 /*
                 .call(d3.axisLeft(y)
@@ -116,12 +117,14 @@
             var xAxis = svg_viz.append("g")
                 .attr("transform", "translate(" + margin + "," + base + ")")
 
+                
             
             // Initialize the barChart
             //var barChart = svg_viz.selectAll("barChart")
                 
             // A function that update the plot for a given value
             function updateBarChart(ds) {
+                console.log("ds = " + ds)
                 // Get the value of the button
                 var tmpYear = d3.select("#selectYearbc").property("value");
 
@@ -149,14 +152,25 @@
                 .range(colors);
 
                 //Update Y Axis
+                var min, max;
                 if(ds==1) {
-                    y.domain([0, d3.max(top10, function(d) {return y(d.Pct_Adults_Obese);}) ]); 
+                    min = d3.min(top10, function(d) {return y(d.Pct_Adults_Obese);})
+                    max = d3.max(top10, function(d) {return y(d.Pct_Adults_Obese);})              
+                    
                 } else {
-                    y.domain([0, d3.max(top10, function(d) {return y(d.Pct_Adults_Owerweight);}) ]);
+                    min = d3.min(top10, function(d) {return y(d.Pct_Adults_Owerweight);})
+                    max = d3.max(top10, function(d) {return y(d.Pct_Adults_Owerweight);})
                 }
 
-                yAxis.transition().duration(1000).call(d3.axisLeft(y));
+                console.log("min = " + min + "  max = " + max)
+                y.domain([min, max]); 
 
+                svg_viz.selectAll(".Yaxis")
+                        .transition()
+                        .duration(1000)
+                        .call(d3.axisLeft().scale(y));
+
+                //yAxis.transition().duration(1000).call(d3.axisLeft(y));
 
                 // Update X axis
                 x.domain(top10Countries);
