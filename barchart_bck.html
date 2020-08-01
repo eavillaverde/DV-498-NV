@@ -93,11 +93,6 @@
             var top10Countries =  d3.map(top10, function(d){return(d.Entity)}).keys();
             console.log(top10Countries); */
 
-            var dropdown = d3
-            .select("#selectYearbc")
-            .selectAll("yearOptions")
-            //.data(years)
-
             var svg_viz = d3.select("#vizbc");
 
             // Initialize Y axis
@@ -157,11 +152,16 @@
                 .domain(top10Countries)
                 .range(colors);
             
+
+                var dropdown = d3
+                    .select("#selectYearbc")
+                    .selectAll("yearOptions")
+                    .data(years)
+
                 dropdown
-                .data(years)
                 .enter()
                 .append("option")
-                //.merge(dropdown)
+                .merge(dropdown)
                 .text(function (d) {
                     return d;
                 }) // text showed in the menu
