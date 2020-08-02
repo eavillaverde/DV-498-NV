@@ -1,0 +1,60 @@
+#headerDiv {
+    text-align: center;
+    height: 80px;
+    width: auto;
+  }
+
+  #inputDiv {
+    text-align: center;
+    height: 80px;
+    width: auto;
+    margin-left:37%;
+  }
+
+  h1{
+      color:rgb(38, 167, 165);
+      padding-top: 0.5em;
+      text-align: center;
+      font-family: "Ambit", Arial, sans-serif;
+      font-size: 40px;
+  }
+  body{
+   color: rgb(54,69,79);
+   font-family: "Ambit", Arial, sans-serif;
+   font-size: 20px;
+  }
+  #groupButton{
+   color: rgb(38, 167, 165);
+   font: 18px Arial, sans-serif;
+   text-align: center;
+  }
+  ul {
+      list-style-type: none;
+      margin-left:37%;
+      
+      padding:0;
+      width:286px;
+      overflow: hidden;
+      
+  }
+  li {
+      float: left;
+      background-color: rgb(38, 167, 165);
+  }
+  li a {
+      display: block;
+      color: white;
+      text-align: center;
+      padding: 16px 40px;
+      text-decoration: none;
+      font-weight: bold;
+      border-left:2px solid white !important;
+      border-right:2px solid white !important;
+      
+  }
+  li a:hover {
+      background-color: rgb(38, 126, 167);
+  }
+  .active {
+      background-color: rgb(38, 85, 167);
+  }
