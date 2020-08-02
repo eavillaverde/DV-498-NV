@@ -62,7 +62,6 @@
                 </div>
               </th>
               <th>
-                
                     <h3>Obesity and Overweight</h3>
                     <p>
                     are defined as abnormal or excessive fat accumulation that may impair health.
@@ -193,7 +192,7 @@
             .data(continents)
             .enter()
             .append("circle")
-                .attr("cx", margin)
+                .attr("cx", margin +margin)
                 .attr("cy", function(d,i){ return i*25}) // 100 is where the first dot appears. 25 is the distance between dots
                 .attr("r", 7)
                 .style("fill", function(d){ return color(d) });
@@ -206,7 +205,7 @@
             .data(continents)
             .enter()
             .append("text")
-                .attr("x", margin + 10)
+                .attr("x", margin + margin +10)
                 .attr("y", function(d,i){ return i*25}) // 100 is where the first dot appears. 25 is the distance between dots
                 .style("fill", function(d){ return color(d)})
                 .text(function(d){ return d})
