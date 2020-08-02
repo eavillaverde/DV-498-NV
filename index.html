@@ -12,6 +12,13 @@
       width: auto;
     }
 
+    #inputDiv {
+      text-align: center;
+      height: 80px;
+      width: auto;
+      margin-left:37%;
+    }
+
     h1{
         color:rgb(38, 167, 165);
         padding-top: 0.5em;
@@ -31,7 +38,7 @@
     }
     ul {
         list-style-type: none;
-        margin-left:36%;
+        margin-left:37%;
         
         padding:0;
         width:286px;
@@ -75,7 +82,8 @@
         </div>
 
         <div id="inputDiv">
-        	<p></p>
+            <p></p>
+            <p></p>
             <label style="float: left;font-size: smaller;" for="country">Choose a year:
                 <select class="box" id="selectYear" value=1990></select>
             </label>
@@ -90,21 +98,6 @@
             </svg>     
         </div>
 
-        <div id="inputDiv">
-        	<p></p>
-            <label style="float: left;font-size: smaller;" for="country">Choose a year:
-                <select class="box" id="selectYear" value=1990></select>
-            </label>
-        </div>
-        <div id="vizpanel">
-            <svg id="viz" width=600 height=600>
-            </svg>
-        </div>
-
-        <div id="legendpanel">
-            <svg id="legend" width=600 height=200>
-            </svg>     
-        </div>
         <script>
         const years = [1990, 1995, 2000, 2005, 2010, 2015];
         const continents = ["Africa", "Asia", "Europe", "North America", "South America" , "Oceania"];
