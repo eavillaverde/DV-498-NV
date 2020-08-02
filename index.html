@@ -135,16 +135,6 @@
                 .tickValues([0,10,20,30,40,50])
                 .tickFormat(d3.format("~s"));
 
-            svg_viz.selectAll(".Yaxis")
-                    .append("g")
-                    .append("text")
-                    .attr("transform", "rotate(-90)")
-                    .attr("y", -25) 
-                    .attr("x", -15)
-                    //.style("text-anchor", "end")
-                    .style("fill","black")
-                    .text("Rate %");
-
             //Create x-axis
             var x = d3.scaleLog()
                 .domain([250, 100000])
@@ -162,8 +152,20 @@
             var svg_viz = d3.select("#viz");
             //d3.select("#viz")
             svg_viz.append("g")
+                    .attr("class","Yaxis")
                     .attr("transform", "translate(" + margin + "," + margin + ")")
                     .call(yAxis)
+            
+            svg_viz.selectAll(".Yaxis")
+            .append("g")
+            .append("text")
+            .attr("transform", "rotate(-90)")
+            .attr("y", -25) 
+            .attr("x", -15)
+            //.style("text-anchor", "end")
+            .style("fill","black")
+            .text("Rate %");
+
             //d3.select("#viz")
             svg_viz.append("g")
                     .attr("transform", "translate(" + margin + "," + base + ")")
