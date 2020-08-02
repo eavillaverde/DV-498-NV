@@ -7,6 +7,42 @@
      <link rel="stylesheet" href="style.css">
    </head>
    <body onload="init(1)">
+    <div id="headerDiv">
+        <h1>Impact of Obesity Around the World</h1>
+    </div>
+    <div>
+        <ul>
+          <li><a class="active" href="index.html">1</a></li>
+          <li><a href="barchart_bck.html">2</a></li>
+          <li><a href="barchart_continents.html">3</a></li>
+        </ul>   
+    </div>
+
+    <div id="inputDiv">
+        <p></p>
+        <p></p>
+        <label style="float: left;font-size: smaller;" for="country">Choose a year:
+            <select class="box" id="selectYear" value=1990></select>
+        </label>
+    </div>
+
+    <table>
+        <tr>
+          <th>Test</th>
+          <th>
+            <div id="vizpanel">
+                <svg id="viz" width=750 height=600>
+                </svg>
+            </div>
+          </th>
+          <th>
+            <div id="legendpanel">
+                <svg id="legend" width=600 height=200>
+                </svg>     
+            </div>
+    </th>
+        </tr>
+      </table>
         <div id="inputbc">
             <div>
                 <label style="float: left;font-size: smaller;" for="country">Choose a Year:
