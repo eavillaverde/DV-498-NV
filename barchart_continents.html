@@ -18,59 +18,46 @@
         </ul>   
     </div>
 
+
     <div id="inputDiv">
-        <p></p>
-        <p></p>
-        <label style="float: left;font-size: smaller;" for="country">Choose a year:
-            <select class="box" id="selectYear" value=1990></select>
-        </label>
+        <div>
+            <label style="float: left;font-size: smaller;" for="country">Choose a Year:
+                <select class="box" id="selectYearbc" value=1990></select>
+            </label>
+            <label style="float: left;font-size: smaller;" for="country">Choose a Continent:
+                <select class="box" id="selectCountrybc" value="North America"></select>
+            </label>
+        </div>
+        <div>
+            <label style="float: left;font-size: smaller;">Select a Rate:
+                <!-- Add buttons -->
+                <button onclick="init(1)">Top 10 Obesity</button>
+                <button onclick="init(2)">Top 10 Overweight</button>
+                <button onclick="init(3)">Top 10 Death/Obesity</button>
+            </label>
+        </div>
     </div>
+
 
     <table>
         <tr>
           <th>Test</th>
           <th>
             <div id="vizpanel">
-                <svg id="viz" width=750 height=600>
+                <svg id="vizbc" width=600 height=650>
                 </svg>
             </div>
           </th>
           <th>
             <div id="legendpanel">
-                <svg id="legend" width=600 height=200>
+                <svg id="legendbc" width=600 height=200>
                 </svg>     
             </div>
     </th>
         </tr>
       </table>
-        <div id="inputbc">
-            <div>
-                <label style="float: left;font-size: smaller;" for="country">Choose a Year:
-                    <select class="box" id="selectYearbc" value=1990></select>
-                </label>
-                <label style="float: left;font-size: smaller;" for="country">Choose a Continent:
-                    <select class="box" id="selectCountrybc" value="North America"></select>
-                </label>
-            </div>
-            <div>
-                <label style="float: left;font-size: smaller;">Select a Rate:
-                    <!-- Add buttons -->
-                    <button onclick="init(1)">Top 10 Obesity</button>
-                    <button onclick="init(2)">Top 10 Overweight</button>
-                    <button onclick="init(3)">Top 10 Death/Obesity</button>
-                </label>
-            </div>
-        </div>
+        
 
-        <div id="vizpanelbc">
-            <svg id="vizbc" width=600 height=650>
-            </svg>
-        </div>
-
-        <div id="legendpanelbc">
-            <svg id="legendbc" width=600 height=200>
-            </svg>     
-        </div>
         <script>
         const years = [1990, 1995, 2000, 2005, 2010, 2015];
         const continents = ["Africa", "Asia", "Europe", "North America", "South America" , "Oceania"];
