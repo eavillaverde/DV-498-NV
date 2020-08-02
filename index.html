@@ -31,20 +31,22 @@
     }
     ul {
         list-style-type: none;
-        margin-left:30%;
-        margin-right:31.5%;
-        width: auto;
+        margin-left:36%;
+        
+        padding:0;
+        width:286px;
         overflow: hidden;
-        background-color: rgb(38, 167, 165);
+        
     }
     li {
         float: left;
+        background-color: rgb(38, 167, 165);
     }
     li a {
         display: block;
         color: white;
         text-align: center;
-        padding: 20px 50px;
+        padding: 16px 40px;
         text-decoration: none;
         font-weight: bold;
         border-left:2px solid white !important;
@@ -67,9 +69,25 @@
         <div>
 			<ul>
               <li><a class="active" href="index.html">1</a></li>
-              <li><a href="hours.html">2</a></li>
-              <li><a href="benefits.html">3</a></li>
+              <li><a href="barchart_bck.html">2</a></li>
+              <li><a href="barchart_continents.html">3</a></li>
             </ul>   
+        </div>
+
+        <div id="inputDiv">
+        	<p></p>
+            <label style="float: left;font-size: smaller;" for="country">Choose a year:
+                <select class="box" id="selectYear" value=1990></select>
+            </label>
+        </div>
+        <div id="vizpanel">
+            <svg id="viz" width=600 height=600>
+            </svg>
+        </div>
+
+        <div id="legendpanel">
+            <svg id="legend" width=600 height=200>
+            </svg>     
         </div>
 
         <div id="inputDiv">
