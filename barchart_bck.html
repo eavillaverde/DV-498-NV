@@ -5,7 +5,9 @@
      <!-- Load d3.js -->
      <script src="https://d3js.org/d3.v5.min.js"></script>
      <link rel="stylesheet" href="style.css">
+     <title>Impact of Obesity Around the World</title>
    </head>
+
    <body onload="init(1)">
     <div id="headerDiv">
         <h1>Impact of Obesity Around the World</h1>
@@ -18,10 +20,18 @@
         </ul>   
     </div>
 
-
     <div id="inputDiv">
         <div>
-            <label style="float: left;font-size: smaller;" for="country">Choose a Year:
+            <p></p>
+            <p></p>
+            <h4>               
+                The following chart shows how the percentage of Obesity people is spread around the world and how it has  
+                grown from 1990 to 2015.
+                Once considered a high-income country (high GDP per Capita) problem, Overweight and Obesity now have a
+                rising trend in low and  middle-income countries, particularly in urban settings. 
+            </h4>
+            <p></p>
+            <label >Choose a Year:
                 <select class="box" id="selectYearbc" value=1990></select>
             </label>
         </div>
@@ -37,7 +47,21 @@
 
     <table>
         <tr>
-          <th>Test</th>
+            <th width=450>
+                <h2>Key Facts</h2>
+                <p>  
+                In 2015, more than 1.9 billion adults aged 18 years and older were overweight. 
+                Of these over 650 million adults were obese.
+                </p><p>
+                In 2015, 39% of adults aged 18 years and over (39% of men and 40% of women) 
+                were overweight.
+                </p><p>
+                Overall, about 13% of the world’s adult population (11% of men and 15% of women) 
+                were obese in 2015. 
+                </p><p>
+                The worldwide prevalence of obesity nearly tripled between 1975 and 2015.
+                </p> 
+            </th>
           <th>
             <div id="vizpanel">
                 <svg id="vizbc" width=600 height=650>
@@ -45,11 +69,21 @@
             </div>
           </th>
           <th>
-            <div id="legendpanel">
-                <svg id="legendbc" width=600 height=200>
-                </svg>     
-            </div>
-    </th>
+            <h3>Obesity and Overweight</h3>
+            <p>
+            are defined as abnormal or excessive fat accumulation that may impair health.
+            Obesity is defined as having a Body Mass Index (BMI) equal to or greater than 30. 
+            </p>
+            <h3>Body mass index (BMI) </h3>
+            <p>BMI is defined as a person's weight in kilograms 
+            divided by the square of his or her height in meters (kg/m2) 
+            and is used to classify Overweight and Obesity in adults.
+            </p>
+            <h3>GDP per capita at purchasing power parity (PPP)</h3> 
+            <p>reflects differences in the cost of living and 
+            the inflation rates of the countries over a period of time.              
+            </p>
+          </th>
         </tr>
       </table>
 
