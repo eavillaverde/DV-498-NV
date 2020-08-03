@@ -25,10 +25,9 @@
             <p></p>
             <p></p>
             <h4>               
-                The following chart shows how the percentage of Obesity people is spread around the world and how it has  
-                grown from 1990 to 2015.
-                Once considered a high-income country (high GDP per Capita) problem, Overweight and Obesity now have a
-                rising trend in low and  middle-income countries, particularly in urban settings. 
+                The following Bar Chart will show the Top 10 Countries with highest values
+                in any of the followuing percentages Obesity/Population, Overweight/Population or Deaths/Obesity 
+                and how they have changed across the time.  
             </h4>
             <p></p>
             <label >Choose a Year:
@@ -351,6 +350,42 @@
                         } 
                     })
                     .style("fill", function (d) { return color(d.Entity); })
+
+                svg_viz
+                    .append('g')
+                    .attr("transform", "translate(" + 50 + ", " +50 + ")")
+                    .append("text")
+                        .attr("x", 250)
+                        .attr("y", 20) 
+                        //.attr("stroke", "rgb(54,69,79)").attr("stroke-width", "1")
+                        .text("The top 10 countries in")
+                        .attr("text-anchor", "left")
+                svg_viz
+                    .append('g')
+                    .attr("transform", "translate(" + 50 + ", " +50 + ")")
+                    .append("text")
+                        .attr("x", 250)
+                        .attr("y", 32) 
+                        //.attr("stroke", "rgb(54,69,79)").attr("stroke-width", "1")
+                        .text("Obesity and Overweight are")
+                        .attr("text-anchor", "left")                       
+                svg_viz
+                        .append('g')
+                        .attr("transform", "translate(" + 50 + ", " +50 + ")")
+                        .append("text")
+                            .attr("x", 250)
+                            .attr("y", 34) 
+                            .attr("stroke", "magenta").attr("stroke-width", "1")
+                            .text("Oceania Pacific Islands, USA")
+                            .attr("text-anchor", "left")
+                svg_viz.append('g')
+                .attr("transform", "translate(" + 50 + ", " +50 + ")").append("text")
+                    .attr("x", 250)
+                    .attr("y", 56) 
+                    .attr("stroke", "green").attr("stroke-width", "1")
+                    .text("and Middle-East Countries")
+                    .attr("text-anchor", "left")
+                    .style("alignment-baseline", "middle")
 
                             
                 //do I neeed to append g for margin?
