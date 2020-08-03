@@ -15,26 +15,22 @@
     <div>
         <ul>
           <li><a href="index.html">1</a></li>
-          <li><a href="barchart_top10.html">2</a></li>
-          <li><a class="active" href="barchart_continents.html">3</a></li>
+          <li><a class="active" href="barchart_top10.html">2</a></li>
+          <li><a href="barchart_continents.html">3</a></li>
         </ul>   
     </div>
 
     <div id="inputDivbc">
         <div>
             <p></p>
-            <p></p>
-            <h4>     
-                The following Bar Chart will show the Top 10 Countries by Region with highest values
+            <h4>               
+                The following Bar Chart will show the Top 10 Countries with highest values
                 in any of the followuing percentages Obesity/Population, Overweight/Population or Deaths/Obesity 
-                and how they have changed across the time.            
+                and how they have changed across the time.  
             </h4>
             <p></p>
-            <label>Choose a Year:
+            <label >Choose a Year:
                 <select class="box" id="selectYearbc" value=1990></select>
-            </label>
-            <label>Choose a Continent:
-                <select class="box" id="selectCountrybc" value="Africa"></select>
             </label>
             <p></p>
         </div>
@@ -52,18 +48,19 @@
     <table>
         <tr>
             <th width=450>
-                <h2>Key Facts</h2>
+                <h2>Key Facts of Pacific Islands</h2>
                 <p>  
-                In 2015, more than 1.9 billion adults aged 18 years and older were overweight. 
-                Of these over 650 million adults were obese.
-                </p><p>
-                In 2015, 39% of adults aged 18 years and over (39% of men and 40% of women) 
-                were overweight.
-                </p><p>
-                Overall, about 13% of the world’s adult population (11% of men and 15% of women) 
-                were obese in 2015. 
-                </p><p>
-                The worldwide prevalence of obesity nearly tripled between 1975 and 2015.
+                The small Oceania Pacific Island States stand out with very high rates of obesity.
+                </p>
+                <p>
+                Pacific island nations and associated states make up the top seven on a 2007 list of heaviest countries, 
+                and eight of the top ten. In all these cases, more than 70% of citizens age 15 and over are obese.
+                </p>
+                <p>
+                Much of the local diet consists of processed, salty and calorie-dense imported food.
+                </p>
+                <p>
+                 Historically a large body size was associated with wealth, power and beauty
                 </p> 
             </th>
           <th>
@@ -72,25 +69,33 @@
                 </svg>
             </div>
           </th>
-          <th>
-            <h3>Obesity and Overweight</h3>
+          <th width=450>
+            <h2>Obesity in the USA</h2>
             <p>
-            are defined as abnormal or excessive fat accumulation that may impair health.
-            Obesity is defined as having a Body Mass Index (BMI) equal to or greater than 30. 
+            In United States (US): nearly 35% of Americans have obesity. 
             </p>
-            <h3>Body mass index (BMI) </h3>
-            <p>BMI is defined as a person's weight in kilograms 
-            divided by the square of his or her height in meters (kg/m2) 
-            and is used to classify Overweight and Obesity in adults.
+            <p>
+            As of 2013, according to the CDC, the lowest Obesity rates (20-25%) were in California, 
+            Colorado, Hawaii, Massachusetts, Montana, Utah, Vermont, and Washington, DC. 
+            The highest (35% or higher) were in Mississippi and West Virginia.
             </p>
-            <h3>GDP per capita at purchasing power parity (PPP)</h3> 
-            <p>reflects differences in the cost of living and 
-            the inflation rates of the countries over a period of time.              
+            <p>
+            Medical costs for individuals with obesity were calculated to be $1429 higher
+            in 2006 than for those of normal weight.
+            </p>
+            <h2>Facts on Middle East</h2> 
+            <p>
+            Obesity in the Middle East is staggering, 
+            particularly in the Gulf high-income, oil-producing countries.  -- Kuwait, Saudi Arabia, Bahrain, 
+            Qatar and the United Arab Emirates.   
+            Changes in food consumption, socioeconomic and demographic factors, physical activity, 
+            and urbanization are being important factors that contribute to the increased prevalence 
+            of obesity in the region.               
             </p>
           </th>
         </tr>
       </table>
-        
+
 
         <script>
         const years = [1990, 1995, 2000, 2005, 2010, 2015];
@@ -100,12 +105,6 @@
         function filterByYear(data, year){
             return data.filter(function(d) {
                 return d.Year == year && d.GDP > 0 ;
-            }); 
-         }
-
-        function filterByContinent(data, continent){
-            return data.filter(function(d) {
-                return d.Continent_Name == continent && d.GDP > 0 ;
             }); 
          }
 
@@ -202,19 +201,13 @@
                 var year = tmpYear ? tmpYear : 1990;
                 console.log("year:" + year); 
 
-                var tmpCont = d3.select("#selectCountrybc").property("value");
-
-                var continent = tmpCont ? tmpCont : "Africa";
-                console.log("continent:" + continent); 
-
                 var filteredDataYear = filterByYear(data, year);
                 console.log(filteredDataYear);
 
-                var filteredContinent = filterByContinent(filteredDataYear, continent);
-                console.log(filteredContinent);
+                //sortDataPAOW(data)
 
-                var sortedData = ds == 1? sortDataPAO(filteredContinent) : 
-                                 ds == 2? sortDataPAOW(filteredContinent) : sortDataPDO(filteredContinent);
+                var sortedData = ds == 1? sortDataPAO(filteredDataYear) : 
+                                 ds == 2? sortDataPAOW(filteredDataYear) : sortDataPDO(filteredDataYear);
                 console.log(sortedData);
 
                 var top10 = getTop10(sortedData);
@@ -240,26 +233,6 @@
                 .enter()
                 .append("option")
                 .merge(dropdown)
-                .transition()
-                .duration(1000)
-                .text(function (d) {
-                    return d;
-                }) // text showed in the menu
-                .attr("value", function (d) {
-                    return d;
-                });
-
-
-                var dropdownCont = d3
-                    .select("#selectCountrybc")
-                    //.selectAll("yearOptions")
-                    .selectAll("option")
-                    .data(continents)
-                    
-                dropdownCont
-                .enter()
-                .append("option")
-                .merge(dropdownCont)
                 .transition()
                 .duration(1000)
                 .text(function (d) {
@@ -314,6 +287,24 @@
                     .attr("transform", "translate(-10,0)rotate(-45)")
                     .style("text-anchor", "end"); 
                 
+                /*
+                svg_viz.selectAll(".Xaxis")
+                    .append("g")   
+                    .append("text")         
+                    .attr("class","XaxisText")
+
+                    var xText = svg_viz.selectAll(".XaxisText")
+                    .enter()
+                    .append("text")
+                    .merge(xText)                   
+                    .transition() // and apply changes to all of them
+                    .duration(1000)
+                    .attr("y", 4) 
+                    .attr("x", base -20)
+                    //.style("text-anchor", "end")
+                    .style("fill","black")
+                    .text("Countries");
+                */
                 
                 //xAxis.transition().duration(1000).call(d3.axisBottom(x))
 
@@ -368,6 +359,42 @@
                     })
                     .style("fill", function (d) { return color(d.Entity); })
 
+                svg_viz
+                    .append('g')
+                    .attr("transform", "translate(" + 50 + ", " +50 + ")")
+                    .append("text")
+                        .attr("x", 250)
+                        .attr("y", 20) 
+                        //.attr("stroke", "rgb(54,69,79)").attr("stroke-width", "1")
+                        .text("The top 10 countries in")
+                        .attr("text-anchor", "left")
+                svg_viz
+                    .append('g')
+                    .attr("transform", "translate(" + 50 + ", " +50 + ")")
+                    .append("text")
+                        .attr("x", 250)
+                        .attr("y", 32) 
+                        //.attr("stroke", "rgb(54,69,79)").attr("stroke-width", "1")
+                        .text("Obesity and Overweight are")
+                        .attr("text-anchor", "left")                       
+                svg_viz
+                        .append('g')
+                        .attr("transform", "translate(" + 50 + ", " +50 + ")")
+                        .append("text")
+                            .attr("x", 250)
+                            .attr("y", 44) 
+                            //.attr("stroke", "magenta").attr("stroke-width", "1")
+                            .text("Oceania Pacific Islands, USA")
+                            .attr("text-anchor", "left")
+                svg_viz.append('g')
+                .attr("transform", "translate(" + 50 + ", " +50 + ")").append("text")
+                    .attr("x", 250)
+                    .attr("y", 56) 
+                    //.attr("stroke", "green").attr("stroke-width", "1")
+                    .text("and Middle-East Countries")
+                    .attr("text-anchor", "left")
+                    .style("alignment-baseline", "middle")
+
                             
                 //do I neeed to append g for margin?
                 /** svg_viz.selectAll("barChart")
@@ -395,15 +422,7 @@
                 // run the updateChart function with this selected option
                 updateBarChart(1); 
             })
-            
 
-            // When the button is changed, run the updateChart function
-            d3.select("#selectCountrybc").on("change", function(d) {
-                // recover the option that has been chosen
-                //var selectedOption = d3.select(this).property("value")
-                // run the updateChart function with this selected option
-                updateBarChart(1); 
-            })
 
             /*
             dropdown
