@@ -195,6 +195,7 @@
             .data(continents)
             .enter()
             .append("circle")
+                //.attr("cx", margin*3)
                 .attr("cx", 140)
                 .attr("cy", function(d,i){ return i*25}) // 100 is where the first dot appears. 25 is the distance between dots
                 .attr("r", 7)
@@ -208,7 +209,8 @@
             .data(continents)
             .enter()
             .append("text")
-                .attr("x", 150
+                //.attr("x", (margin*3) +10)
+                .attr("x", 150)
                 .attr("y", function(d,i){ return i*25}) // 100 is where the first dot appears. 25 is the distance between dots
                 .style("fill", function(d){ return color(d)})
                 .text(function(d){ return d})
