@@ -35,19 +35,20 @@
                 <select class="box" id="selectYearbc" value=1990></select>
             </label>
             <label>Choose a Continent:
-                <select class="box" id="selectCountrybc" value="North America"></select>
+                <select class="box" id="selectCountrybc" value="Africa"></select>
             </label>
+            <p></p>
         </div>
         <div>
-            <label style="float: left;font-size: smaller;">Select a Rate:
+            <label >Select a Rate:
                 <!-- Add buttons -->
                 <button onclick="init(1)">Top 10 Obesity</button>
                 <button onclick="init(2)">Top 10 Overweight</button>
                 <button onclick="init(3)">Top 10 Death/Obesity</button>
             </label>
+            <p></p>
         </div>
     </div>
-
 
     <table>
         <tr>
@@ -204,7 +205,7 @@
 
                 var tmpCont = d3.select("#selectCountrybc").property("value");
 
-                var continent = tmpCont ? tmpCont : "North America";
+                var continent = tmpCont ? tmpCont : "Africa";
                 console.log("continent:" + continent); 
 
                 var filteredDataYear = filterByYear(data, year);
