@@ -34,7 +34,7 @@
                 <select class="box" id="selectYearbc" value=1990></select>
             </label>
             <label>Choose a Continent:
-                <select class="box" id="selectCountrybc" value="Africa"></select>
+                <select class="box" id="selectCountrybc" value="North America"></select>
             </label>
             <p></p>
         </div>
@@ -105,7 +105,7 @@
         <script>
         const years = [1990, 1995, 2000, 2005, 2010, 2015];
         const continents = ["Africa", "Asia", "Europe", "North America", "South America" , "Oceania"];
-        const colors = ["#44bcd8", "#1979a9", "#042f66", "69bdd2", "deepskyblue", "green", "darkgreen", "#24a49c", "lime" ,"darkcyan"];
+        const colors = ["#44bcd8", "#1979a9", "#042f66", "69bdd2", "deepskyblue", "#2655a7", "#26a7a5", "#24a49c", "lime" ,"darkcyan"];
 
         function filterByYear(data, year){
             return data.filter(function(d) {
@@ -214,7 +214,7 @@
 
                 var tmpCont = d3.select("#selectCountrybc").property("value");
 
-                var continent = tmpCont ? tmpCont : "Africa";
+                var continent = tmpCont ? tmpCont : "North America";
                 console.log("continent:" + continent); 
 
                 var filteredDataYear = filterByYear(data, year);
